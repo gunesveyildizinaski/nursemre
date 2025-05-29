@@ -208,7 +208,7 @@
       const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
 
       document.getElementById("sayac").textContent =
-        `${gun}.${saat}.${dakika}.${saniye}`;
+        ${gun}.${saat}.${dakika}.${saniye};
     }
 
     setInterval(guncelleSayac, 1000);
