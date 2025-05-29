@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Güneş ve Yıldızın Aşkı</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      font-family: 'Times New Roman', serif;
+      background-image: url("4k.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .buton {
+      width: 280px;
+      padding: 18px 0;
+      text-align: center;
+      background-color: #f5f5f5;
+      color: #333;
+      text-decoration: none;
+      border-radius: 12px;
+      border: 2px solid white;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .buton:hover {
+      background-color: #eaeaea;
+      transform: translateY(-2px);
+    }
+
+    /* Sayaç stili: sadece konum ve yazı rengi */
+    #sayac {
+      position: fixed;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      white-space: nowrap;
+      z-index: 10;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .footer-frame {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* For Nursena yazısı */
+    .for-nursena {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Ephesis', cursive;
+      font-size: 36px;
+      color: #000;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* Sosyal ikonlar container */
+    .social-icons {
+      position: fixed;
+      bottom: 110px;
+      right: 10px;
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      z-index: 9999;
+    }
+
+    /* Instagram ikonu */
+    .social-icons a.instagram {
+      display: block;
+      transform: translateY(6px);
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+    }
+
+    /* YouTube ikonu */
+    .social-icons a.youtube {
+      display: block;
+      cursor: pointer;
+      width: 40px;
+      height: 28px;
+    }
+
+    /* ==== Mobil için düzenleme ==== */
+    @media (max-width: 768px) {
+      .buton {
+        width: 320px;
+        padding: 24px 0;
+        font-size: 26px;
+        border-radius: 14px;
+      }
+
+      .for-nursena {
+        font-size: 48px;
+        top: 30px;
+      }
+
+      #sayac {
+        font-size: 32px;
+        bottom: 140px;
+      }
+
+      .social-icons {
+        bottom: 140px;
+        right: 15px;
+        gap: 20px;
+      }
+
+      .social-icons a.instagram,
+      .social-icons a.youtube {
+        width: 56px !important;
+        height: 56px !important;
+      }
+
+      .social-icons a.youtube {
+        height: 40px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="container">
+      <a href="siir-katalogu.html" class="buton">Şiir Kataloğu 📖</a>
+      <a href="askfali.html" class="buton">Aşk Falı 💖</a>
+      <a href="burcyorumu.html" class="buton">Burç Yorumu ☆</a>
+    </div>
+  </div>
+
+  <!-- Sayaç -->
+  <div id="sayac"></div>
+
+  <!-- Alt çerçeve görseli -->
+  <img src="cerceve.png" alt="" class="footer-frame" />
+
+  <!-- For Nursena yazısı -->
+  <div class="for-nursena">For Nursena</div>
+
+  <!-- Sosyal ikonlar -->
+  <div class="social-icons">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/aliemre_yildiz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profili" class="instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#E4405F" width="40" height="40">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm8.6 1.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+      </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@balakademii" target="_blank" rel="noopener noreferrer" aria-label="YouTube Kanalı" class="youtube">
+      <svg viewBox="0 0 68 48" width="40" height="28" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FF0000" d="M66.52 7.87a8.21 8.21 0 0 0-5.77-5.81C56.08 1.5 34 1.5 34 1.5s-22.08 0-26.75.56a8.21 8.21 0 0 0-5.77 5.81A85.45 85.45 0 0 0 1 24a85.45 85.45 0 0 0 .48 16.13 8.21 8.21 0 0 0 5.77 5.81c4.67.56 26.75.56 26.75.56s22.08 0 26.75-.56a8.21 8.21 0 0 0 5.77-5.81A85.45 85.45 0 0 0 67 24a85.45 85.45 0 0 0-.48-16.13z"/>
+        <path fill="#fff" d="M45 24 27 14v20z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    const baslangicZamani = new Date("2024-06-14T18:00:00");
+
+    function guncelleSayac() {
+      const simdi = new Date();
+      const fark = simdi - baslangicZamani;
+
+      if (fark < 0) {
+        document.getElementById("sayac").textContent = "Sayaç başlama zamanı gelmedi.";
+        return;
+      }
+
+      const saniye = Math.floor(fark / 1000) % 60;
+      const dakika = Math.floor(fark / (1000 * 60)) % 60;
+      const saat = Math.floor(fark / (1000 * 60 * 60)) % 24;
+      const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+
+      document.getElementById("sayac").textContent =
+        `${gun}.${saat}.${dakika}.${saniye}`;
+    }
+
+    setInterval(guncelleSayac, 1000);
+    guncelleSayac();
+  </script>
+
+</body>
+</html>
