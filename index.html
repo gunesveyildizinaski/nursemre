@@ -45,7 +45,6 @@
       transform: translateY(-2px);
     }
 
-    /* Sayaç stili: sadece konum ve yazı rengi */
     #sayac {
       position: fixed;
       bottom: 110px;
@@ -57,10 +56,6 @@
       color: #333;
       white-space: nowrap;
       z-index: 10;
-      background: none;
-      padding: 0;
-      border-radius: 0;
-      box-shadow: none;
     }
 
     .footer-frame {
@@ -74,7 +69,6 @@
       pointer-events: none;
     }
 
-    /* For Nursena yazısı */
     .for-nursena {
       position: fixed;
       top: 10px;
@@ -88,7 +82,6 @@
       pointer-events: none;
     }
 
-    /* Sosyal ikonlar container */
     .social-icons {
       position: fixed;
       bottom: 110px;
@@ -99,7 +92,6 @@
       z-index: 9999;
     }
 
-    /* Instagram ikonu */
     .social-icons a.instagram {
       display: block;
       transform: translateY(6px);
@@ -108,7 +100,6 @@
       height: 40px;
     }
 
-    /* YouTube ikonu */
     .social-icons a.youtube {
       display: block;
       cursor: pointer;
@@ -116,7 +107,6 @@
       height: 28px;
     }
 
-    /* ==== Mobil için düzenleme ==== */
     @media (max-width: 768px) {
       .buton {
         width: 320px;
@@ -163,16 +153,10 @@
     </div>
   </div>
 
-  <!-- Sayaç -->
   <div id="sayac"></div>
-
-  <!-- Alt çerçeve görseli -->
   <img src="cerceve.png" alt="" class="footer-frame" />
-
-  <!-- For Nursena yazısı -->
   <div class="for-nursena">For Nursena</div>
 
-  <!-- Sosyal ikonlar -->
   <div class="social-icons">
     <!-- Instagram -->
     <a href="https://www.instagram.com/aliemre_yildiz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profili" class="instagram">
@@ -208,7 +192,7 @@
       const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
 
       document.getElementById("sayac").textContent =
-        ${gun}.${saat}.${dakika}.${saniye};
+        `${gun}.${saat}.${dakika}.${saniye}`;
     }
 
     setInterval(guncelleSayac, 1000);
