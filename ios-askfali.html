@@ -94,7 +94,7 @@
       font-size: 22px;
       color: black;
       text-align: center;
-      white-space: pre-line;
+      white-space: pre-wrap; /* pre-line yerine pre-wrap */
       max-width: 90%;
       opacity: 0;
       transition: opacity 0.6s ease;
@@ -128,49 +128,49 @@
   <script>
     // Şiirler
     const siirler = [
-      "Sözlere değil sana çabasını ve zamanını ayırana inan .",
-      "Sen ol da , ister yar ol , ister yara ;\nLütfun da başım üstüne , kahrın da.",
-      "Bahar bir insanla gelebilir bir insana .",
-      "Çiçeklerden papatyayı \nİnsanlardan seni sevdim .",
-      "Onu sevmek nefes almak gibiydi , \nbir insan nefes almaktan nasıl vazgeçer ki ?",
-      "Bazen beklemek lazım ,\nen güzeli için ...",
-      "Neyi düşünsem , seni düşünüyorum .\nNeyi görsem , seni görüyorum .",
-      "Ve hayattır sevmek.\nBirini çok uzaktayken bile ,\nyüreğinde taşıyabilmek .",
-      "Keşke sen ben olsan ;\nSeni sevmenin ne kadar \nzor olduğunu anlasan .\nKeşke ben sen olsam ;\nBu kadar sevilmenin tadını çıkarsam ...",
-      "Öylesine güzel\nseviyorum ki seni ,\nÖylesine Saf . \nÖylesine temiz .\nÖylesine derin .\nVe ''Öylesine'' değil ...",
-      "Sen yeter ki çocukluk yap .\nGönlümde salıncağın hep hazır .",
-      "Ey sevgili !\nBir geceliğine\ndeğiş tokuş etsek yüreğimizi ,\nTaşıyabilir miydin bendeki seni ?",
-      "Aklımdan çıkmıyor \nAklım çıkıyor\nO çıkmıyor ",
-      "Ama uzaktaydı \nUzaklığını düşündükçe \nOna daha da güçlü bağlanıyordum .",
-      "İçimde sana kavuşma ümidi güçlendikçe , \nKainatı güllük gülistanlık görüyorum ...",
-      "Benim kalbim senin ellerinde çiçek açtı .\nBunu sana nasıl anlatırım bilmiyorum ...",
-      "Beni bu hayata bağlayan her şey \nSenin iki kolun arasında birikmiş\ngibi ... ",
-      "Senden başkasını sevecek , \nkalbim de yok gücüm de .",
-      "Yanımda taşıdığım fotoğrafının , \ngözlerinden öptüm \ndefalarca .",
-      "Bir gün daha \nseni görmeden geçiyor .\n  Ama kavuşacağız ",
-      "İyi gelen ne varsa\nhepsi sensin işte .",
-      "Her gün bir kere hatırlar mısın beni ?\nHer hatırladığında gülümser misin bire kere ?\nkimseye belli etmeden ...",
-      "Muazzam bir ihtimalsin .\nGökyüzüne dokunmak gibi . \nTüm maviliklerin sahibi olmak gibi\nHani nasıl desem ' mutlu olmak gibi ...",
-      "Bin yıl ömrüm olsa\nBin yıl seni severdim .\nBin yıl benim olsan \nBin yıl daha isterdim .",
-      "Seni sevmeyi dünyanın en güzel \nşiiri yapacağım ...",
-      "Yaşamın boyunca başına bir tane bile\nkötü olay gelmemesini dileyecek kadar \nçok seviyorum seni .",
-      "Ben bütün bu - belki de manasız -\niç sıkıntılarından senin var olduğunu \nhatırlayarak sıyrılıyorum ...",
-      "Gökyüzünün çilleri var bu gece . \nVe sen onlardan bile güzelsin ...",
-      "Bugün beni ne kadar seviyorsun balım  :)",
-      "Kim ne derse desin \nya da ne yaparsa yapsın\nsen hep rengini yitirmeyen\nbir zümrüt olacaksın balım ...",
-      "Sen benim Gün eşimsin ,\nzifirin bile örtemediği .\nBen senin yıldızınım\nSenden uzakta zifirin içinde ...",
-      "Sen benim en kıymetli sırrımsın ...",
-      "Çiçek de çiçekli günler de sensin ...",
-      "Emre'ye sormuşlar :\nO yâr ile hoş musun ?\nHoş olayım , olmayayim\nO yâr benim , kime ne ?",
-      "Emre için en kötüsü de bir gün \ngerçekten sevilirse buna inanmanın\nzorluğunu fark etmesi olacaktı ...",
-      "Günlere bakarsın katı katı ,\nÜzerine çekersin perde .\nYoldan geçenler var da\nHer akşam gelenler nerede ?",
-      "Ne başkası oldu ne de olacak .\nSen çalmazsan kapım açılmayacak .",
-      "Emre güzelliğini kaybetmiş bu dünyada \nNursenasına şahit olmuştu ...",
-      "Ne çıkar yanımda olmasan !\nKalbim senden ibaret değil mi ?\nUzaktan sevmek zor demişsin .\nEtme sevdam\nUzaktan sevmek ibadet değil mi ?",
-      "Kalbimi gülümsetiyorsun",
-      "Gözümle gördüğüm değil ,\nGönlümde kördüğümsün .\nÇözmeye niyetim yok , \nSen benim ömürlüğümsün ...",
-      "Sende gördüğümü görecekler diye ödüm kopuyor .",
-      "Gözüm gözüne değmeden yazdığım şiirler melal .\nVarsın değmesin razıyım ey  yâr ...\nBöylesi de helal !"
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . \n `,
+      `Sen ol da , ister yar ol , ister yara ;\n Lütfun da başım üstüne , kahrın da .\n `,
+      `Bahar bir insanla gelebilir bir insana .\n `,
+      `Çiçeklerden papatyayı \n İnsanlardan seni sevdim .\n `,
+      `Onu sevmek nefes almak gibiydi , \n bir insan nefes almaktan nasıl vazgeçer ki ?\n `,
+      `Bazen beklemek lazım ,\n en güzeli için ...\n `,
+      `Neyi düşünsem , seni düşünüyorum .\n Neyi görsem , seni görüyorum .\n `,
+      `Ve hayattır sevmek.\n Birini çok uzaktayken bile ,\n yüreğinde taşıyabilmek .\n `,
+      `Keşke sen ben olsan ;\n Seni sevmenin ne kadar \n zor olduğunu anlasan .\n Keşke ben sen olsam ;\n Bu kadar sevilmenin tadını çıkarsam ...\n `,
+      `Öylesine güzel\n seviyorum ki seni ,\n Öylesine Saf . \n Öylesine temiz .\n Öylesine derin .\n Ve ''Öylesine'' değil ...\n `,
+      `Sen yeter ki çocukluk yap .\n Gönlümde salıncağın hep hazır .\n `,
+      `Ey sevgili !\n Bir geceliğine\n değiş tokuş etsek yüreğimizi ,\n Taşıyabilir miydin bendeki seni ?\n `,
+      `Aklımdan çıkmıyor \n Aklım çıkıyor\n O çıkmıyor \n `,
+      `Ama uzaktaydı \n Uzaklığını düşündükçe \n Ona daha da güçlü bağlanıyordum .\n `,
+      `İçimde sana kavuşma ümidi güçlendikçe , \n Kainatı güllük gülistanlık görüyorum ...\n `,
+      `Benim kalbim senin ellerinde çiçek açtı .\n Bunu sana nasıl anlatırım bilmiyorum ...\n `,
+      `Beni bu hayata bağlayan her şey \n Senin iki kolun arasında birikmiş\n gibi ... \n `,
+      `Senden başkasını sevecek , \n kalbim de yok gücüm de .\n `,
+      `Yanımda taşıdığım fotoğrafının , \n gözlerinden öptüm \n defalarca .\n `,
+      `Bir gün daha \n seni görmeden geçiyor .\n  Ama kavuşacağız \n `,
+      `İyi gelen ne varsa\n hepsi sensin işte .\n `,
+      `Her gün bir kere hatırlar mısın beni ?\n Her hatırladığında gülümser misin bire kere ?\n kimseye belli etmeden ...\n `,
+      `Muazzam bir ihtimalsin .\n Gökyüzüne dokunmak gibi . \n Tüm maviliklerin sahibi olmak gibi\n Hani nasıl desem ' mutlu olmak gibi ...\n `,
+      `Bin yıl ömrüm olsa\n Bin yıl seni severdim .\n Bin yıl benim olsan \n Bin yıl daha isterdim .\n `,
+      `Seni sevmeyi dünyanın en güzel \n şiiri yapacağım ...\n `,
+      `Yaşamın boyunca başına bir tane bile\n kötü olay gelmemesini dileyecek kadar \n çok seviyorum seni .\n `,
+      `Ben bütün bu - belki de manasız -\n iç sıkıntılarından senin var olduğunu \n hatırlayarak sıyrılıyorum ...\n `,
+      `Gökyüzünün çilleri var bu gece . \n Ve sen onlardan bile güzelsin ...\n `,
+      `Bugün beni ne kadar seviyorsun balım  :)\n `,
+      `Kim ne derse desin \n ya da ne yaparsa yapsın\n sen hep rengini yitirmeyen\n bir zümrüt olacaksın balım ...\n `,
+      `Sen benim Gün eşimsin ,\n zifirin bile örtemediği .\n Ben senin yıldızınım\n Senden uzakta zifirin içinde ...\n `,
+      `Sen benim en kıymetli sırrımsın ...\n `,
+      `Çiçek de çiçekli günler de sensin ...\n `,
+      `Emre'ye sormuşlar :\n O yâr ile hoş musun ?\n Hoş olayım , olmayayim\n O yâr benim , kime ne ?\n `,
+      `Emre için en kötüsü de bir gün \n gerçekten sevilirse buna inanmanın\n zorluğunu fark etmesi olacaktı ...\n `,
+      `Günlere bakarsın katı katı ,\n Üzerine çekersin perde .\n Yoldan geçenler var da\n Her akşam gelenler nerede ?\n `,
+      `Ne başkası oldu ne de olacak .\n Sen çalmazsan kapım açılmayacak .\n `,
+      `Emre güzelliğini kaybetmiş bu dünyada \n Nursenasına şahit olmuştu ...\n `,
+      `Ne çıkar yanımda olmasan !\n Kalbim senden ibaret değil mi ?\n Uzaktan sevmek zor demişsin .\n Etme sevdam\n Uzaktan sevmek ibadet değil mi ?\n `,
+      `Kalbimi gülümsetiyorsun\n `,
+      `Gözümle gördüğüm değil ,\n Gönlümde kördüğümsün .\n Çözmeye niyetim yok , \n Sen benim ömürlüğümsün ...\n `,
+      `Sende gördüğümü görecekler diye ödüm kopuyor .\n `,
+      `Gözüm gözüne değmeden yazdığım şiirler melal .\n Varsın değmesin razıyım ey  yâr ...\n Böylesi de helal !\n `
     ];
 
     const siirDizesiDiv = document.getElementById('siirDizesi');
@@ -220,17 +220,19 @@
           return siirler[randIndex];
         }
       }
-      // Eğer 50 denemede bulamazsa direkt rastgele dön
+      // Çok şanssızsa, rastgele ver
       return siirler[Math.floor(Math.random() * siirler.length)];
     }
 
-    // Şiiri göster
+    // Şiiri gösterme
     function showNextSiir() {
       const nextSiir = getNextSiir();
-      adjustFontSize(nextSiir);
+      // Satır sonlarını <br> ile değiştiriyoruz
+      const htmlSiir = nextSiir.replace(/\n/g, '<br>');
+      adjustFontSize(nextSiir); // Burada textContent ile ölçüm yapıyoruz
       siirDizesiDiv.style.opacity = '0';
       setTimeout(() => {
-        siirDizesiDiv.textContent = nextSiir;
+        siirDizesiDiv.innerHTML = htmlSiir; // HTML olarak veriyoruz
         siirDizesiDiv.style.opacity = '1';
       }, 300);
     }
@@ -238,16 +240,11 @@
     // Başlangıçta tarih göster
     showDate();
 
-    // İlk şiir göster
+    // İlk şiiri göster
     showNextSiir();
 
-    // Butona tıklayınca yeni şiir göster
+    // Buton tıklanınca yeni şiir göster
     buton.addEventListener('click', showNextSiir);
-
-    // Dokunmatik cihazlarda sadece dikey kaydırmayı önle, yatay scroll engellenmesin
-    document.body.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-    }, { passive: false });
 
   </script>
 </body>
