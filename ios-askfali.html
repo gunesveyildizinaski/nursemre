@@ -89,10 +89,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: 'italic', sans-serif;
+      font-family: 'Arial', sans-serif;
+      font-style: italic; /* İtalik yazı stili burada */
       font-size: 22px;
       color: black;
       text-align: center;
+      white-space: pre-line; /* Satır sonları korunur */
       max-width: 90%;
       opacity: 0;
       transition: opacity 0.6s ease;
@@ -164,31 +166,56 @@
       `Kalbimi gülümsetiyorsun`,
       `Gözümle gördüğüm değil ,\nGönlümde kördüğümsün .\nÇözmeye niyetim yok ,\nSen benim ömürlüğümsün ...`,
       `Sende gördüğümü görecekler diye ödüm kopuyor .`,
-      `Gözüm gözüne değmeden yazdığım şiirler melal .\nVarsın değmesin razıyım ey yâr ...\nBöylesi de helal !`
+      `Gözümün önünde değilsin ,\nAma yüreğimde hep varsın .`,
+      `Birini sevmek için\nGözleri değil ,\nKalbi kullanmak gerek ...`,
+      `Seni sevmekten ölesiye mutluyum .`,
+      `Bu gece son kez\ngözlerine bakabilsem\nyarına daha güzel uyanırım ...`,
+      `Başımı yastığıma koyduğumda\nyüreğimde seni buluyorum .`,
+      `Beni sevdin ,\nbir kere de olsa\nBeni sevdin işte ...`,
+      `Bir gün\ngökyüzünde o kadar yıldız olur ki ,\nBeni sevdiğini duyurmaya ,\nyıldızların her birine\ntaş yazmaya çalışırım ...`,
+      `Beni hiç üzemeyeceksin .`,
+      `Seninle sevmek ,\nBu dünyanın en güzel rüyası .`,
+      `Seni seviyorum ,\nBeni sevdiğin gibi ...`
     ];
 
-    let kalanSiirler = [...siirler];
-
+    const siirDizesiDiv = document.getElementById('siirDizesi');
+    const dateDiv = document.getElementById('dateToday');
     const buton = document.querySelector('.buton');
-    const siirDizesi = document.getElementById('siirDizesi');
+
+    function formatDate(date) {
+      const options = { day: 'numeric', month: 'long' };
+      return date.toLocaleDateString('tr-TR', options);
+    }
+
+    // Tarihi göster
+    function showDate() {
+      const now = new Date();
+      dateDiv.textContent = formatDate(now);
+      dateDiv.style.opacity = '1';
+    }
+
+    // Şiiri göster, opacity animasyonuyla
+    function showSiir(text) {
+      siirDizesiDiv.style.opacity = '0';
+      setTimeout(() => {
+        siirDizesiDiv.textContent = text;
+        siirDizesiDiv.style.opacity = '1';
+      }, 300);
+    }
+
+    // Rastgele şiir getir
+    function getRandomSiir() {
+      const index = Math.floor(Math.random() * siirler.length);
+      return siirler[index];
+    }
 
     buton.addEventListener('click', () => {
-      if (kalanSiirler.length === 0) kalanSiirler = [...siirler];
-      const index = Math.floor(Math.random() * kalanSiirler.length);
-      const secilen = kalanSiirler.splice(index, 1)[0];
-      siirDizesi.style.opacity = 0;
-      setTimeout(() => {
-        siirDizesi.textContent = secilen;
-        siirDizesi.style.opacity = 1;
-      }, 600);
+      showSiir(getRandomSiir());
     });
 
-    // Tarihi ayarla
-    const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-    const bugun = new Date();
-    const gun = bugun.getDate();
-    const ay = aylar[bugun.getMonth()];
-    document.getElementById("dateToday").textContent = `${gun} ${ay}`;
+    // İlk açılışta tarih ve şiir göster
+    showDate();
+    showSiir(getRandomSiir());
   </script>
 
 </body>
