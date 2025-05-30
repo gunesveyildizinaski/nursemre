@@ -15,6 +15,18 @@
       background-position: center;
       background-repeat: no-repeat;
       overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-top: 80px; /* üst boşluk */
+      padding-bottom: 120px; /* footer boşluk */
+      color: #111;
     }
 
     .for-nursena {
@@ -28,6 +40,7 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
       z-index: 9999;
       pointer-events: none;
+      white-space: nowrap;
     }
 
     .footer-frame {
@@ -41,93 +54,76 @@
       pointer-events: none;
     }
 
+    .tarih, .dize {
+      max-width: 90vw;
+      text-align: center;
+      margin: 15px 0;
+      user-select: none;
+    }
+
     .tarih {
-      position: fixed;
-      top: 150px;
-      left: 50%;
-      transform: translateX(-50%);
       font-size: 28px;
       font-weight: bold;
-      color: #111;
-      z-index: 10;
-      user-select: none;
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
     }
 
     .dize {
-      position: fixed;
-      top: 260px;
-      left: 50%;
-      transform: translateX(-50%);
       font-size: 22px;
       font-style: italic;
-      color: #222;
-      max-width: 400px;
-      z-index: 10;
-      user-select: none;
-      text-align: center;
-      display: none;
       opacity: 0;
       transition: opacity 1s ease;
+      font-weight: normal;
+      min-height: 60px; /* boşluk için */
     }
 
-    .fade-in {
-      opacity: 1 !important;
+    .dize.fade-in {
+      opacity: 1;
     }
 
     .buton-container {
-      position: fixed;
-      bottom: 250px;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 30px;
       cursor: pointer;
-      z-index: 15;
       animation: pulse 2s infinite;
       width: 80px;
       height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .buton-container:hover {
-      transform: translateX(-50%) scale(1.1);
+      transform: scale(1.1);
+      animation-play-state: paused;
     }
 
     @keyframes pulse {
       0%, 100% {
-        transform: translateX(-50%) scale(1);
+        transform: scale(1);
       }
       50% {
-        transform: translateX(-50%) scale(1.1);
+        transform: scale(1.1);
       }
     }
 
-    /* 📱 iPhone 13 ve benzeri cihazlar için mobil görünüm */
+    /* Mobil için */
     @media screen and (max-width: 430px) {
       .for-nursena {
         font-size: 48px;
-        top: 30px;
+        top: 20px;
       }
 
       .tarih {
-        top: 110px;
-        font-size: 32px;
-        max-width: 90%;
-        padding: 0 20px;
+        font-size: 24px;
       }
 
       .dize {
-        top: 180px;
-        font-size: 28px;
-        line-height: 1.6;
-        max-width: 90%;
-        padding: 0 20px;
+        font-size: 20px;
+        min-height: 80px;
       }
 
       .buton-container {
-        bottom: 140px;
         width: 90px;
         height: 90px;
+        margin-top: 40px;
       }
 
       .footer-frame {
