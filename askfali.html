@@ -41,10 +41,9 @@
       pointer-events: none;
     }
 
-    /* Tarih ortada, üstten biraz aşağı */
     .tarih {
       position: fixed;
-      top: 150px;       /* for nursena'dan biraz aşağı */
+      top: 150px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 28px;
@@ -57,10 +56,9 @@
       max-width: 400px;
     }
 
-    /* Şiir dizesi tarih altı, arada boşluk */
     .dize {
       position: fixed;
-      top: 300px;      /* tarih altı ve arada boşluk */
+      top: 300px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 22px;
@@ -76,10 +74,9 @@
       transition: opacity 0.5s ease-in-out;
     }
 
-    /* Buton alt kısımda, ortada */
     .buton-container {
       position: fixed;
-      bottom: 250px;   /* çerçevenin üstünde */
+      bottom: 250px;
       left: 50%;
       transform: translateX(-50%);
       cursor: pointer;
@@ -102,28 +99,27 @@
       }
     }
 
-    /* Mobil düzenlemeleri */
     @media (max-width: 600px) {
       .tarih {
-        top: 100px;
-        font-size: 24px;
-        max-width: 90%;
+        top: 120px !important;
+        font-size: 20px !important;
+        max-width: 90% !important;
       }
 
       .dize {
-        top: 180px;
-        font-size: 18px;
-        max-width: 90%;
+        top: 150px !important;
+        font-size: 16px !important;
+        max-width: 90% !important;
       }
 
       .buton-container {
-        bottom: 120px;
-        width: 60px;
-        height: 60px;
+        bottom: 130px !important;
+        width: 60px !important;
+        height: 60px !important;
       }
 
       .for-nursena {
-        font-size: 28px;
+        font-size: 24px !important;
       }
     }
   </style>
