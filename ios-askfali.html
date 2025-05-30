@@ -1,251 +1,199 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>iOS Aşk Falı</title>
-  <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Georgia, 'Times New Roman', serif;
-      background-image: url('4k.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      overflow-x: hidden;
-      overflow-y: hidden;
-      touch-action: none;
-      color: black;
-      position: relative;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<title>iOS Aşk Falı</title>
+<link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet" />
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    font-family: Georgia, 'Times New Roman', serif;
+    background-image: url('4k.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    touch-action: none;
+    color: black;
+    position: relative;
+  }
 
-    .for-nursena {
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Ephesis', cursive;
-      font-size: 22px;
-      font-weight: bold;
-      color: #000;
-      z-index: 10;
-      user-select: none;
-      pointer-events: none;
-    }
+  .for-nursena {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Ephesis', cursive;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    z-index: 10;
+    user-select: none;
+    pointer-events: none;
+  }
 
-    .date {
-      position: fixed;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family:  'Times New Roman', serif;
-      font-weight: bold;
-      font-size: 22px;
-      color: black;
-      opacity: 0;
-      animation: fadeIn 1s forwards;
-      z-index: 10;
-      user-select: none;
-      pointer-events: none;
-    }
+  .date {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 22px;
+    color: black;
+    opacity: 1;
+    z-index: 10;
+    user-select: none;
+    pointer-events: none;
+  }
 
-    .footer-frame {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      object-fit: cover;
-      z-index: 5;
-      pointer-events: none;
-    }
+  /* Şiir PNG gösterim alanı */
+  .siir-gorsel-container {
+    position: fixed;
+    top: 110px; /* Tarih altı, buton üstü arasında */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;  /* PNG genişliği + boşluk */
+    height: 200px; /* PNG yüksekliği */
+    overflow: hidden;
+    z-index: 15;
+  }
 
-    .buton {
-      position: fixed;
-      bottom: 120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
-      background: url('buton.png') no-repeat center center;
-      background-size: contain;
-      border: none;
-      cursor: pointer;
-      z-index: 20;
-      animation: pulse 2s infinite;
-      user-select: none;
-    }
+  .siir-gorsel-container img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 320px;
+    height: 200px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    user-select: none;
+    pointer-events: none;
+  }
 
-    @keyframes pulse {
-      0%, 100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.1); }
-    }
+  .siir-gorsel-container img.active {
+    opacity: 1;
+  }
 
-    .siir-dizesi {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: Georgia, 'Times New Roman', serif;
-      font-style: italic;
-      font-size: 22px;
-      color: black;
-      text-align: center;
-      white-space: pre-wrap; /* pre-line yerine pre-wrap */
-      max-width: 90%;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      z-index: 15;
-      user-select: none;
-      pointer-events: none;
-      line-height: 1.4;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+  .footer-frame {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    object-fit: cover;
+    z-index: 5;
+    pointer-events: none;
+  }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+  .buton {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: url('buton.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+    animation: pulse 2s infinite;
+    user-select: none;
+  }
 
-    @media (min-width: 769px) {
-      body {
-        display: none;
-      }
+  @keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+  }
+
+  @media (min-width: 769px) {
+    body {
+      display: none;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <div class="for-nursena">For Nursena</div>
-  <div class="date" id="dateToday"></div>
-  <button class="buton" aria-label="Şiir Getir"></button>
-  <div class="siir-dizesi" id="siirDizesi"></div>
-  <img src="cerceve.png" alt="Alt Çerçeve" class="footer-frame" />
+<div class="for-nursena">For Nursena</div>
+<div class="date" id="dateToday"></div>
 
-  <script>
-    // Şiirler
-    const siirler = [
-      `Sözlere değil sana çabasını ve zamanını ayırana inan . \n `,
-      `Sen ol da , ister yar ol , ister yara ;\n Lütfun da başım üstüne , kahrın da .\n `,
-      `Bahar bir insanla gelebilir bir insana .\n `,
-      `Çiçeklerden papatyayı \n İnsanlardan seni sevdim .\n `,
-      `Onu sevmek nefes almak gibiydi , \n bir insan nefes almaktan nasıl vazgeçer ki ?\n `,
-      `Bazen beklemek lazım ,\n en güzeli için ...\n `,
-      `Neyi düşünsem , seni düşünüyorum .\n Neyi görsem , seni görüyorum .\n `,
-      `Ve hayattır sevmek.\n Birini çok uzaktayken bile ,\n yüreğinde taşıyabilmek .\n `,
-      `Keşke sen ben olsan ;\n Seni sevmenin ne kadar \n zor olduğunu anlasan .\n Keşke ben sen olsam ;\n Bu kadar sevilmenin tadını çıkarsam ...\n `,
-      `Öylesine güzel\n seviyorum ki seni ,\n Öylesine Saf . \n Öylesine temiz .\n Öylesine derin .\n Ve ''Öylesine'' değil ...\n `,
-      `Sen yeter ki çocukluk yap .\n Gönlümde salıncağın hep hazır .\n `,
-      `Ey sevgili !\n Bir geceliğine\n değiş tokuş etsek yüreğimizi ,\n Taşıyabilir miydin bendeki seni ?\n `,
-      `Aklımdan çıkmıyor \n Aklım çıkıyor\n O çıkmıyor \n `,
-      `Ama uzaktaydı \n Uzaklığını düşündükçe \n Ona daha da güçlü bağlanıyordum .\n `,
-      `İçimde sana kavuşma ümidi güçlendikçe , \n Kainatı güllük gülistanlık görüyorum ...\n `,
-      `Benim kalbim senin ellerinde çiçek açtı .\n Bunu sana nasıl anlatırım bilmiyorum ...\n `,
-      `Beni bu hayata bağlayan her şey \n Senin iki kolun arasında birikmiş\n gibi ... \n `,
-      `Senden başkasını sevecek , \n kalbim de yok gücüm de .\n `,
-      `Yanımda taşıdığım fotoğrafının , \n gözlerinden öptüm \n defalarca .\n `,
-      `Bir gün daha \n seni görmeden geçiyor .\n  Ama kavuşacağız \n `,
-      `İyi gelen ne varsa\n hepsi sensin işte .\n `,
-      `Her gün bir kere hatırlar mısın beni ?\n Her hatırladığında gülümser misin bire kere ?\n kimseye belli etmeden ...\n `,
-      `Muazzam bir ihtimalsin .\n Gökyüzüne dokunmak gibi . \n Tüm maviliklerin sahibi olmak gibi\n Hani nasıl desem ' mutlu olmak gibi ...\n `,
-      `Bin yıl ömrüm olsa\n Bin yıl seni severdim .\n Bin yıl benim olsan \n Bin yıl daha isterdim .\n `,
-      `Seni sevmeyi dünyanın en güzel \n şiiri yapacağım ...\n `,
-      `Yaşamın boyunca başına bir tane bile\n kötü olay gelmemesini dileyecek kadar \n çok seviyorum seni .\n `,
-      `Ben bütün bu - belki de manasız -\n iç sıkıntılarından senin var olduğunu \n hatırlayarak sıyrılıyorum ...\n `,
-      `Gökyüzünün çilleri var bu gece . \n Ve sen onlardan bile güzelsin ...\n `,
-      `Bugün beni ne kadar seviyorsun balım  :)\n `,
-      `Kim ne derse desin \n ya da ne yaparsa yapsın\n sen hep rengini yitirmeyen\n bir zümrüt olacaksın balım ...\n `,
-      `Sen benim Gün eşimsin ,\n zifirin bile örtemediği .\n Ben senin yıldızınım\n Senden uzakta zifirin içinde ...\n `,
-      `Sen benim en kıymetli sırrımsın ...\n `,
-      `Çiçek de çiçekli günler de sensin ...\n `,
-      `Emre'ye sormuşlar :\n O yâr ile hoş musun ?\n Hoş olayım , olmayayim\n O yâr benim , kime ne ?\n `,
-      `Emre için en kötüsü de bir gün \n gerçekten sevilirse buna inanmanın\n zorluğunu fark etmesi olacaktı ...\n `,
-      `Günlere bakarsın katı katı ,\n Üzerine çekersin perde .\n Yoldan geçenler var da\n Her akşam gelenler nerede ?\n `,
-      `Ne başkası oldu ne de olacak .\n Sen çalmazsan kapım açılmayacak .\n `,
-      `Emre güzelliğini kaybetmiş bu dünyada \n Nursenasına şahit olmuştu ...\n `,
-      `Ne çıkar yanımda olmasan !\n Kalbim senden ibaret değil mi ?\n Uzaktan sevmek zor demişsin .\n Etme sevdam\n Uzaktan sevmek ibadet değil mi ?\n `,
-      `Kalbimi gülümsetiyorsun\n `,
-      `Gözümle gördüğüm değil ,\n Gönlümde kördüğümsün .\n Çözmeye niyetim yok , \n Sen benim ömürlüğümsün ...\n `,
-      `Sende gördüğümü görecekler diye ödüm kopuyor .\n `,
-      `Gözüm gözüne değmeden yazdığım şiirler melal .\n Varsın değmesin razıyım ey  yâr ...\n Böylesi de helal !\n `
-    ];
+<div class="siir-gorsel-container" id="siirContainer">
+  <!-- Buraya javascript ile png img tagleri gelecek -->
+</div>
 
-    const siirDizesiDiv = document.getElementById('siirDizesi');
-    const dateDiv = document.getElementById('dateToday');
-    const buton = document.querySelector('.buton');
+<button class="buton" aria-label="Şiir Getir"></button>
 
-    // Gün + Ay biçiminde tarih gösterimi
-    function showDate() {
-      const today = new Date();
-      const options = { day: 'numeric', month: 'long' };
-      dateDiv.textContent = today.toLocaleDateString('tr-TR', options);
-      dateDiv.style.opacity = '1';
-    }
+<img src="cerceve.png" alt="Alt Çerçeve" class="footer-frame" />
 
-    // Otomatik yazı boyutu ayarlama (min 14, max 22px arası)
-    function adjustFontSize(text) {
-      let fontSize = 22;
-      siirDizesiDiv.style.fontSize = fontSize + 'px';
-      siirDizesiDiv.textContent = text;
-      const maxHeight = window.innerHeight * 0.4; // max yükseklik %40 ekran
-      const maxWidth = window.innerWidth * 0.9;   // max genişlik %90 ekran
+<script>
+  // Şiir PNG dosyalarının isimleri (istediğin kadar ekle)
+  const siirPngler = [
+    '1.png',
+    '2.png',
+    '3.png',
+    '4.png',
+    '5.png',
+    //... diğer pngler
+  ];
 
-      // Küçültme döngüsü
-      while ((siirDizesiDiv.scrollHeight > maxHeight || siirDizesiDiv.scrollWidth > maxWidth) && fontSize > 14) {
-        fontSize -= 1;
-        siirDizesiDiv.style.fontSize = fontSize + 'px';
-      }
+  const container = document.getElementById('siirContainer');
+  const buton = document.querySelector('.buton');
+  const dateDiv = document.getElementById('dateToday');
 
-      // Büyütme döngüsü (boşluk kalmasın, max 22)
-      while (siirDizesiDiv.scrollHeight < maxHeight * 0.8 && siirDizesiDiv.scrollWidth < maxWidth * 0.8 && fontSize < 22) {
-        fontSize += 1;
-        siirDizesiDiv.style.fontSize = fontSize + 'px';
+  // Tarihi göster
+  function showDate() {
+    const today = new Date();
+    const options = { day: 'numeric', month: 'long' };
+    dateDiv.textContent = today.toLocaleDateString('tr-TR', options);
+  }
+  showDate();
+
+  // img elementlerini oluştur ve container içine ekle
+  const imgElements = siirPngler.map((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Şiir ${index + 1}`;
+    if (index === 0) img.classList.add('active');
+    container.appendChild(img);
+    return img;
+  });
+
+  // Rastgele farklı index için hafıza tut
+  let lastIndexes = [];
+  const minInterval = 5; // aynı şiir tekrarından önce 5 farklı gösterim olsun
+
+  function getRandomIndex() {
+    for(let attempts=0; attempts<50; attempts++){
+      const rand = Math.floor(Math.random() * siirPngler.length);
+      if(!lastIndexes.includes(rand)){
+        lastIndexes.push(rand);
+        if(lastIndexes.length > minInterval) lastIndexes.shift();
+        return rand;
       }
     }
+    return Math.floor(Math.random() * siirPngler.length);
+  }
 
-    // Son gösterilen şiirin indexini ve tekrar arasını kontrol etmek için
-    let lastIndexes = [];
-    const minInterval = 5; // Aynı şiir tekrarından önce en az 5 farklı gösterim olmalı
+  let currentIndex = 0;
 
-    // Yeni şiir seçimi, tekrar kontrolü
-    function getNextSiir() {
-      for (let attempts = 0; attempts < 50; attempts++) {
-        const randIndex = Math.floor(Math.random() * siirler.length);
-        if (!lastIndexes.includes(randIndex)) {
-          lastIndexes.push(randIndex);
-          if (lastIndexes.length > minInterval) lastIndexes.shift();
-          return siirler[randIndex];
-        }
-      }
-      // Çok şanssızsa, rastgele ver
-      return siirler[Math.floor(Math.random() * siirler.length)];
-    }
+  // Şiir görselini göster (fade in animasyon CSS'de var)
+  function showSiir(index) {
+    if(index === currentIndex) return; // Aynı görsel tekrar gösterilmesin
 
-    // Şiiri gösterme
-    function showNextSiir() {
-      const nextSiir = getNextSiir();
-      // Satır sonlarını <br> ile değiştiriyoruz
-      const htmlSiir = nextSiir.replace(/\n/g, '<br>');
-      adjustFontSize(nextSiir); // Burada textContent ile ölçüm yapıyoruz
-      siirDizesiDiv.style.opacity = '0';
-      setTimeout(() => {
-        siirDizesiDiv.innerHTML = htmlSiir; // HTML olarak veriyoruz
-        siirDizesiDiv.style.opacity = '1';
-      }, 300);
-    }
+    imgElements[currentIndex].classList.remove('active');
+    imgElements[index].classList.add('active');
+    currentIndex = index;
+  }
 
-    // Başlangıçta tarih göster
-    showDate();
+  // Butona tıklanınca rastgele şiir göster
+  buton.addEventListener('click', () => {
+    const nextIndex = getRandomIndex();
+    showSiir(nextIndex);
+  });
+</script>
 
-    // İlk şiiri göster
-    showNextSiir();
-
-    // Buton tıklanınca yeni şiir göster
-    buton.addEventListener('click', showNextSiir);
-
-  </script>
 </body>
 </html>
