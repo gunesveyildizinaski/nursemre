@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Arial', sans-serif;
+      font-family: Georgia, 'Times New Roman', serif;
       background-image: url('4k.png');
       background-size: cover;
       background-position: center;
@@ -41,8 +41,9 @@
       top: 60px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Times New Roman', serif;
+      font-family: Georgia, 'Times New Roman', serif;
       font-weight: bold;
+      font-style: italic;
       font-size: 22px;
       color: black;
       opacity: 0;
@@ -91,19 +92,19 @@
       transform: translate(-50%, -50%);
       font-family: Georgia, 'Times New Roman', serif;
       font-style: italic;
-      font-size: 22px; /* başlangıç font büyüklüğü */
+      font-size: 22px;
       color: black;
       text-align: center;
-      white-space: pre-line; /* Satır sonları korunur */
+      white-space: pre-line;
       max-width: 90%;
-      max-height: 50vh; /* Yükseklik sınırı */
-      overflow: hidden;
       opacity: 0;
-      transition: opacity 0.6s ease, font-size 0.3s ease;
+      transition: opacity 0.6s ease;
       z-index: 15;
       user-select: none;
       pointer-events: none;
       line-height: 1.4;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
 
     @keyframes fadeIn {
@@ -126,6 +127,7 @@
   <img src="cerceve.png" alt="Alt Çerçeve" class="footer-frame" />
 
   <script>
+    // Şiirler (senin verdiğin tam liste buraya yapıştırıldı)
     const siirler = [
 `Sözlere değil sana çabasını ve zamanını ayırana inan .`,
 `Sen ol da , ister yar ol , ister yara ;
@@ -245,73 +247,80 @@ Varsın değmesin razıyım ey  yâr ...
 Böylesi de helal !`
     ];
 
-    const siirDiv = document.getElementById('siirDizesi');
-    const button = document.querySelector('.buton');
+    const siirDizesiDiv = document.getElementById('siirDizesi');
+    const dateDiv = document.getElementById('dateToday');
+    const buton = document.querySelector('.buton');
 
-    // En az 5 şiir arası tekrar için sayaç
-    let lastIndex = -1;
-    let skipCount = 0;
-    const minSkip = 5; 
-
-    function adjustFontSize() {
-      // Otomatik font küçültme/büyütme max 22px, min 12px arasında yapılıyor
-      let fontSize = 22;
-      siirDiv.style.fontSize = fontSize + 'px';
-
-      // Sığana kadar fontu küçült
-      while ((siirDiv.scrollHeight > siirDiv.clientHeight || siirDiv.scrollWidth > siirDiv.clientWidth) && fontSize > 12) {
-        fontSize -= 1;
-        siirDiv.style.fontSize = fontSize + 'px';
-      }
-
-      // Çok küçük ise biraz büyüt (eğer alan müsaitse)
-      while ((siirDiv.scrollHeight <= siirDiv.clientHeight && siirDiv.scrollWidth <= siirDiv.clientWidth) && fontSize < 22) {
-        fontSize += 1;
-        siirDiv.style.fontSize = fontSize + 'px';
-        if (siirDiv.scrollHeight > siirDiv.clientHeight || siirDiv.scrollWidth > siirDiv.clientWidth) {
-          fontSize -= 1;
-          siirDiv.style.fontSize = fontSize + 'px';
-          break;
-        }
-      }
-    }
-
-    function showRandomPoem() {
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * siirler.length);
-        // Eğer son seçilen index ile aynıysa veya skip sayısı yeterli değilse tekrar seç
-      } while ((newIndex === lastIndex) || (skipCount < minSkip && newIndex === lastIndex));
-
-      lastIndex = newIndex;
-      skipCount = 0;
-
-      siirDiv.style.opacity = 0;
-
-      setTimeout(() => {
-        siirDiv.textContent = siirler[newIndex];
-        adjustFontSize();
-        siirDiv.style.opacity = 1;
-      }, 600);
-    }
-
-    button.addEventListener('click', () => {
-      skipCount++;
-      showRandomPoem();
-    });
-
-    // Sayfa açılır açılmaz tarih gösterimi
+    // Gün + Ay biçiminde tarih gösterimi
     function showDate() {
-      const dateDiv = document.getElementById('dateToday');
       const today = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+      const options = { day: 'numeric', month: 'long' };
       dateDiv.textContent = today.toLocaleDateString('tr-TR', options);
       dateDiv.style.opacity = '1';
     }
-    showDate();
 
-    // İlk şiiri göster
-    showRandomPoem();
+    // Otomatik yazı boyutu ayarlama (min 14, max 22px arası)
+    function adjustFontSize(text) {
+      let fontSize = 22;
+      siirDizesiDiv.style.fontSize = fontSize + 'px';
+      siirDizesiDiv.textContent = text;
+      const maxHeight = window.innerHeight * 0.4; // max yükseklik %40 ekran
+      const maxWidth = window.innerWidth * 0.9;   // max genişlik %90 ekran
+
+      // Küçültme döngüsü
+      while ((siirDizesiDiv.scrollHeight > maxHeight || siirDizesiDiv.scrollWidth > maxWidth) && fontSize > 14) {
+        fontSize -= 1;
+        siirDizesiDiv.style.fontSize = fontSize + 'px';
+      }
+
+      // Büyütme döngüsü (boşluk kalmasın, max 22)
+      while (siirDizesiDiv.scrollHeight < maxHeight * 0.8 && siirDizesiDiv.scrollWidth < maxWidth * 0.8 && fontSize < 22) {
+        fontSize += 1;
+        siirDizesiDiv.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    // Son gösterilen şiirin indexini ve tekrar arasını kontrol etmek için
+    let lastIndexes = [];
+    const minInterval = 5; // Aynı şiir tekrarından önce en az 5 farklı gösterim olmalı
+
+    // Yeni şiir seçimi, tekrar kontrolü
+    function getNextSiir() {
+      for (let attempts = 0; attempts < 50; attempts++) {
+        const randIndex = Math.floor(Math.random() * siirler.length);
+        if (!lastIndexes.includes(randIndex)) {
+          lastIndexes.push(randIndex);
+          if (lastIndexes.length > minInterval) lastIndexes.shift();
+          return siirler[randIndex];
+        }
+      }
+      // Eğer 50 denemede bulamazsa direkt rastgele dön
+      return siirler[Math.floor(Math.random() * siirler.length)];
+    }
+
+    // Şiiri göster
+    function showNextSiir() {
+      const nextSiir = getNextSiir();
+      adjustFontSize(nextSiir);
+      siirDizesiDiv.style.opacity = '0';
+      setTimeout(() => {
+        siirDizesiDiv.textContent = nextSiir;
+        adjustFontSize(nextSiir);
+        siirDizesiDiv.style.opacity = '1';
+      }, 300);
+    }
+
+    // Başlangıçta tarih göster
+    showDate();
+    // Başlangıçta şiir göster
+    showNextSiir();
+
+    // Butona tıklayınca yeni şiir
+    buton.addEventListener('click', showNextSiir);
+
+    // İstersen otomatik şiir değişimi açabilirsin:
+    // setInterval(showNextSiir, 15000); // 15 saniyede bir değiştirir
+
   </script>
 
 </body>
