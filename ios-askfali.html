@@ -89,18 +89,19 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: 'Arial', sans-serif;
-      font-style: italic; /* İtalik yazı stili burada */
-      font-size: 22px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 26px;
       color: black;
       text-align: center;
-      white-space: pre-line; /* Satır sonları korunur */
+      white-space: pre-line;
       max-width: 90%;
       opacity: 0;
       transition: opacity 0.6s ease;
       z-index: 15;
       user-select: none;
       pointer-events: none;
+      line-height: 1.7;
     }
 
     @keyframes fadeIn {
@@ -124,58 +125,40 @@
 
   <script>
     const siirler = [
-      `Sözlere değil sana çabasını ve zamanını ayırana inan .`,
-      `Sen ol da , ister yar ol , ister yara ;\nLütfun da başım üstüne , kahrın da .`,
-      `Bahar bir insanla gelebilir bir insana .`,
-      `Çiçeklerden papatyayı\nİnsanlardan seni sevdim .`,
-      `Onu sevmek nefes almak gibiydi ,\nbir insan nefes almaktan nasıl vazgeçer ki ?`,
-      `Bazen beklemek lazım ,\nen güzeli için ...`,
-      `Neyi düşünsem , seni düşünüyorum .\nNeyi görsem , seni görüyorum .`,
-      `Ve hayattır sevmek.\nBirini çok uzaktayken bile ,\nyüreğinde taşıyabilmek .`,
-      `Keşke sen ben olsan ;\nSeni sevmenin ne kadar\nzor olduğunu anlasan .\nKeşke ben sen olsam ;\nBu kadar sevilmenin tadını çıkarsam ...`,
-      `Öylesine güzel\nseviyorum ki seni ,\nÖylesine Saf .\nÖylesine temiz .\nÖylesine derin .\nVe ''Öylesine'' değil ...`,
-      `Sen yeter ki çocukluk yap .\nGönlümde salıncağın hep hazır .`,
-      `Ey sevgili !\nBir geceliğine\ndeğiş tokuş etsek yüreğimizi ,\nTaşıyabilir miydin bendeki seni ?`,
-      `Aklımdan çıkmıyor \nAklım çıkıyor\nO çıkmıyor`,
-      `Ama uzaktaydı\nUzaklığını düşündükçe\nOna daha da güçlü bağlanıyordum .`,
-      `İçimde sana kavuşma ümidi güçlendikçe ,\nKainatı güllük gülistanlık görüyorum ...`,
-      `Benim kalbim senin ellerinde çiçek açtı .\nBunu sana nasıl anlatırım bilmiyorum ...`,
-      `Beni bu hayata bağlayan her şey\nSenin iki kolun arasında birikmiş\ngibi ...`,
-      `Senden başkasını sevecek ,\nkalbim de yok gücüm de .`,
-      `Yanımda taşıdığım fotoğrafının ,\ngözlerinden öptüm\ndefalarca .`,
-      `Bir gün daha\nseni görmeden geçiyor .\nAma kavuşacağız`,
-      `İyi gelen ne varsa\nhepsi sensin işte .`,
-      `Her gün bir kere hatırlar mısın beni ?\nHer hatırladığında gülümser misin bire kere ?\nkimseye belli etmeden ...`,
-      `Muazzam bir ihtimalsin .\nGökyüzüne dokunmak gibi .\nTüm maviliklerin sahibi olmak gibi\nHani nasıl desem ' mutlu olmak gibi ...`,
-      `Bin yıl ömrüm olsa\nBin yıl seni severdim .\nBin yıl benim olsan\nBin yıl daha isterdim .`,
-      `Seni sevmeyi dünyanın en güzel\nşiiri yapacağım ...`,
-      `Yaşamın boyunca başına bir tane bile\nkötü olay gelmemesini dileyecek kadar\nçok seviyorum seni .`,
-      `Ben bütün bu - belki de manasız -\niç sıkıntılarından senin var olduğunu\nhatırlayarak sıyrılıyorum ...`,
-      `Gökyüzünün çilleri var bu gece .\nVe sen onlardan bile güzelsin ...`,
-      `Bugün beni ne kadar seviyorsun balım :)`,
-      `Kim ne derse desin\nya da ne yaparsa yapsın\nsen hep rengini yitirmeyen\nbir zümrüt olacaksın balım ...`,
-      `Sen benim Gün eşimsin ,\nzifirin bile örtemediği .\nBen senin yıldızınım\nSenden uzakta zifirin içinde ...`,
-      `Sen benim en kıymetli sırrımsın ...`,
-      `Çiçek de çiçekli günler de sensin ...`,
-      `Emre'ye sormuşlar :\nO yâr ile hoş musun ?\nHoş olayım , olmayayim\nO yâr benim , kime ne ?`,
-      `Emre için en kötüsü de bir gün\ngerçekten sevilirse buna inanmanın\nzorluğunu fark etmesi olacaktı ...`,
-      `Günlere bakarsın katı katı ,\nÜzerine çekersin perde .\nYoldan geçenler var da\nHer akşam gelenler nerede ?`,
-      `Ne başkası oldu ne de olacak .\nSen çalmazsan kapım açılmayacak .`,
-      `Emre güzelliğini kaybetmiş bu dünyada\nNursenasına şahit olmuştu ...`,
-      `Ne çıkar yanımda olmasan !\nKalbim senden ibaret değil mi ?\nUzaktan sevmek zor demişsin .\nEtme sevdam\nUzaktan sevmek ibadet değil mi ?`,
-      `Kalbimi gülümsetiyorsun`,
-      `Gözümle gördüğüm değil ,\nGönlümde kördüğümsün .\nÇözmeye niyetim yok ,\nSen benim ömürlüğümsün ...`,
-      `Sende gördüğümü görecekler diye ödüm kopuyor .`,
-      `Gözümün önünde değilsin ,\nAma yüreğimde hep varsın .`,
-      `Birini sevmek için\nGözleri değil ,\nKalbi kullanmak gerek ...`,
-      `Seni sevmekten ölesiye mutluyum .`,
-      `Bu gece son kez\ngözlerine bakabilsem\nyarına daha güzel uyanırım ...`,
-      `Başımı yastığıma koyduğumda\nyüreğimde seni buluyorum .`,
-      `Beni sevdin ,\nbir kere de olsa\nBeni sevdin işte ...`,
-      `Bir gün\ngökyüzünde o kadar yıldız olur ki ,\nBeni sevdiğini duyurmaya ,\nyıldızların her birine\ntaş yazmaya çalışırım ...`,
-      `Beni hiç üzemeyeceksin .`,
-      `Seninle sevmek ,\nBu dünyanın en güzel rüyası .`,
-      `Seni seviyorum ,\nBeni sevdiğin gibi ...`
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sen ol da , ister yar ol , ister yara ;
+       Lütfun da başım üstüne , kahrın da .. `
+      `Bahar bir insanla gelebilir bir insana . . `
+      ` Çiçeklerden papatyayı 
+İnsanlardan seni sevdim . . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
+      `Sözlere değil sana çabasını ve zamanını ayırana inan . `
     ];
 
     const siirDizesiDiv = document.getElementById('siirDizesi');
@@ -187,14 +170,12 @@
       return date.toLocaleDateString('tr-TR', options);
     }
 
-    // Tarihi göster
     function showDate() {
       const now = new Date();
       dateDiv.textContent = formatDate(now);
       dateDiv.style.opacity = '1';
     }
 
-    // Şiiri göster, opacity animasyonuyla
     function showSiir(text) {
       siirDizesiDiv.style.opacity = '0';
       setTimeout(() => {
@@ -203,7 +184,6 @@
       }, 300);
     }
 
-    // Rastgele şiir getir
     function getRandomSiir() {
       const index = Math.floor(Math.random() * siirler.length);
       return siirler[index];
@@ -213,7 +193,6 @@
       showSiir(getRandomSiir());
     });
 
-    // İlk açılışta tarih ve şiir göster
     showDate();
     showSiir(getRandomSiir());
   </script>
