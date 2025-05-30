@@ -24,34 +24,32 @@
 
     .for-nursena {
       position: fixed;
-      top:5px;  /* Yukarıya daha yakın */
+      top: 10px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Ephesis', cursive;
-      font-size: 28px;
+      font-size: 22px;
       font-weight: bold;
       color: #000;
-      /* gölge kaldırıldı */
       z-index: 10;
       user-select: none;
       pointer-events: none;
     }
 
-    .bugun-tarih {
-      font-family: 'Times New Roman', serif;
-      font-size: 22px;
-      font-weight: bold;
-      color: black;
-      opacity: 0;
-      transition: opacity 1s ease;
-      margin-top: 12px;  /* For Nursena'nın altında daha aşağıda */
-      user-select: none;
-      pointer-events: none;
+    .date {
       position: fixed;
-      top: 66px;  /* for-nursena top 22px + font size + margin, ayarla uyumlu */
+      top: 42px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 11;
+      font-family: 'Times New Roman', serif;
+      font-weight: bold;
+      font-size: 22px;
+      color: black;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      z-index: 10;
+      user-select: none;
+      pointer-events: none;
     }
 
     .footer-frame {
@@ -59,7 +57,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 40px;
+      height: 50px;
       object-fit: cover;
       z-index: 5;
       pointer-events: none;
@@ -67,7 +65,7 @@
 
     .buton {
       position: fixed;
-      bottom: 65px; /* 5px üstünde alt çerçeve (60px) */
+      bottom: 120px;
       left: 50%;
       transform: translateX(-50%);
       width: 60px;
@@ -91,7 +89,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: 'Arial', sans-serif;
+      font-family: 'italic', sans-serif;
       font-size: 22px;
       color: black;
       text-align: center;
@@ -101,6 +99,10 @@
       z-index: 15;
       user-select: none;
       pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     @media (min-width: 769px) {
@@ -113,48 +115,80 @@
 <body>
 
   <div class="for-nursena">For Nursena</div>
-  <div class="bugun-tarih" id="bugunTarih"></div>
-
+  <div class="date" id="dateToday"></div>
   <button class="buton" aria-label="Şiir Getir"></button>
-
   <div class="siir-dizesi" id="siirDizesi"></div>
-
   <img src="cerceve.png" alt="Alt Çerçeve" class="footer-frame" />
 
   <script>
     const siirler = [
-      "Aşk bir güneştir, kalpte ışır.",
-      "Sevda bir deniz, içinde yüzerim.",
-      "Kalbim sana, sonsuza dek bağlı.",
-      "Gözlerin yıldız, gecem aydınlık.",
-      "Her adımda sen varsın, hayatımda."
+      `Sözlere değil sana çabasını ve zamanını ayırana inan .`,
+      `Sen ol da , ister yar ol , ister yara ;\nLütfun da başım üstüne , kahrın da .`,
+      `Bahar bir insanla gelebilir bir insana .`,
+      `Çiçeklerden papatyayı\nİnsanlardan seni sevdim .`,
+      `Onu sevmek nefes almak gibiydi ,\nbir insan nefes almaktan nasıl vazgeçer ki ?`,
+      `Bazen beklemek lazım ,\nen güzeli için ...`,
+      `Neyi düşünsem , seni düşünüyorum .\nNeyi görsem , seni görüyorum .`,
+      `Ve hayattır sevmek.\nBirini çok uzaktayken bile ,\nyüreğinde taşıyabilmek .`,
+      `Keşke sen ben olsan ;\nSeni sevmenin ne kadar\nzor olduğunu anlasan .\nKeşke ben sen olsam ;\nBu kadar sevilmenin tadını çıkarsam ...`,
+      `Öylesine güzel\nseviyorum ki seni ,\nÖylesine Saf .\nÖylesine temiz .\nÖylesine derin .\nVe ''Öylesine'' değil ...`,
+      `Sen yeter ki çocukluk yap .\nGönlümde salıncağın hep hazır .`,
+      `Ey sevgili !\nBir geceliğine\ndeğiş tokuş etsek yüreğimizi ,\nTaşıyabilir miydin bendeki seni ?`,
+      `Aklımdan çıkmıyor \nAklım çıkıyor\nO çıkmıyor`,
+      `Ama uzaktaydı\nUzaklığını düşündükçe\nOna daha da güçlü bağlanıyordum .`,
+      `İçimde sana kavuşma ümidi güçlendikçe ,\nKainatı güllük gülistanlık görüyorum ...`,
+      `Benim kalbim senin ellerinde çiçek açtı .\nBunu sana nasıl anlatırım bilmiyorum ...`,
+      `Beni bu hayata bağlayan her şey\nSenin iki kolun arasında birikmiş\ngibi ...`,
+      `Senden başkasını sevecek ,\nkalbim de yok gücüm de .`,
+      `Yanımda taşıdığım fotoğrafının ,\ngözlerinden öptüm\ndefalarca .`,
+      `Bir gün daha\nseni görmeden geçiyor .\nAma kavuşacağız`,
+      `İyi gelen ne varsa\nhepsi sensin işte .`,
+      `Her gün bir kere hatırlar mısın beni ?\nHer hatırladığında gülümser misin bire kere ?\nkimseye belli etmeden ...`,
+      `Muazzam bir ihtimalsin .\nGökyüzüne dokunmak gibi .\nTüm maviliklerin sahibi olmak gibi\nHani nasıl desem ' mutlu olmak gibi ...`,
+      `Bin yıl ömrüm olsa\nBin yıl seni severdim .\nBin yıl benim olsan\nBin yıl daha isterdim .`,
+      `Seni sevmeyi dünyanın en güzel\nşiiri yapacağım ...`,
+      `Yaşamın boyunca başına bir tane bile\nkötü olay gelmemesini dileyecek kadar\nçok seviyorum seni .`,
+      `Ben bütün bu - belki de manasız -\niç sıkıntılarından senin var olduğunu\nhatırlayarak sıyrılıyorum ...`,
+      `Gökyüzünün çilleri var bu gece .\nVe sen onlardan bile güzelsin ...`,
+      `Bugün beni ne kadar seviyorsun balım :)`,
+      `Kim ne derse desin\nya da ne yaparsa yapsın\nsen hep rengini yitirmeyen\nbir zümrüt olacaksın balım ...`,
+      `Sen benim Gün eşimsin ,\nzifirin bile örtemediği .\nBen senin yıldızınım\nSenden uzakta zifirin içinde ...`,
+      `Sen benim en kıymetli sırrımsın ...`,
+      `Çiçek de çiçekli günler de sensin ...`,
+      `Emre'ye sormuşlar :\nO yâr ile hoş musun ?\nHoş olayım , olmayayim\nO yâr benim , kime ne ?`,
+      `Emre için en kötüsü de bir gün\ngerçekten sevilirse buna inanmanın\nzorluğunu fark etmesi olacaktı ...`,
+      `Günlere bakarsın katı katı ,\nÜzerine çekersin perde .\nYoldan geçenler var da\nHer akşam gelenler nerede ?`,
+      `Ne başkası oldu ne de olacak .\nSen çalmazsan kapım açılmayacak .`,
+      `Emre güzelliğini kaybetmiş bu dünyada\nNursenasına şahit olmuştu ...`,
+      `Ne çıkar yanımda olmasan !\nKalbim senden ibaret değil mi ?\nUzaktan sevmek zor demişsin .\nEtme sevdam\nUzaktan sevmek ibadet değil mi ?`,
+      `Kalbimi gülümsetiyorsun`,
+      `Gözümle gördüğüm değil ,\nGönlümde kördüğümsün .\nÇözmeye niyetim yok ,\nSen benim ömürlüğümsün ...`,
+      `Sende gördüğümü görecekler diye ödüm kopuyor .`,
+      `Gözüm gözüne değmeden yazdığım şiirler melal .\nVarsın değmesin razıyım ey yâr ...\nBöylesi de helal !`
     ];
+
+    let kalanSiirler = [...siirler];
 
     const buton = document.querySelector('.buton');
     const siirDizesi = document.getElementById('siirDizesi');
-    const bugunTarih = document.getElementById('bugunTarih');
-
-    // Tarih formatı: 30 Mayıs
-    const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-    const tarih = new Date();
-    const gun = tarih.getDate();
-    const ay = aylar[tarih.getMonth()];
-    bugunTarih.textContent = `${gun} ${ay}`;
-    
-    // Tarih fade in
-    setTimeout(() => {
-      bugunTarih.style.opacity = 1;
-    }, 500);
 
     buton.addEventListener('click', () => {
-      const rastgeleIndex = Math.floor(Math.random() * siirler.length);
+      if (kalanSiirler.length === 0) kalanSiirler = [...siirler];
+      const index = Math.floor(Math.random() * kalanSiirler.length);
+      const secilen = kalanSiirler.splice(index, 1)[0];
       siirDizesi.style.opacity = 0;
-
       setTimeout(() => {
-        siirDizesi.textContent = siirler[rastgeleIndex];
+        siirDizesi.textContent = secilen;
         siirDizesi.style.opacity = 1;
       }, 600);
     });
+
+    // Tarihi ayarla
+    const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    const bugun = new Date();
+    const gun = bugun.getDate();
+    const ay = aylar[bugun.getMonth()];
+    document.getElementById("dateToday").textContent = `${gun} ${ay}`;
   </script>
 
 </body>
