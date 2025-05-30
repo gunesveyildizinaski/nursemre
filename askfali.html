@@ -71,6 +71,9 @@
       user-select: none;
       text-align: center;
       display: none;
+
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
     /* Buton alt kısımda, ortada */
@@ -98,6 +101,31 @@
         transform: translateX(-50%) scale(1.1);
       }
     }
+
+    /* Mobil düzenlemeleri */
+    @media (max-width: 600px) {
+      .tarih {
+        top: 100px;
+        font-size: 24px;
+        max-width: 90%;
+      }
+
+      .dize {
+        top: 180px;
+        font-size: 18px;
+        max-width: 90%;
+      }
+
+      .buton-container {
+        bottom: 120px;
+        width: 60px;
+        height: 60px;
+      }
+
+      .for-nursena {
+        font-size: 28px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -123,8 +151,6 @@
       "Kalbim, adını her attığında biraz daha sen oluyor."
     ];
 
-    let oncekiIndex = -1;
-
     function formatTarih() {
       const aylar = [
         "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
@@ -138,17 +164,22 @@
 
     document.getElementById("tarih").textContent = formatTarih();
 
+    let oncekiRastgele = -1;
+    const dizeEl = document.getElementById("dize");
+
     function yeniDize() {
       let rastgele;
       do {
         rastgele = Math.floor(Math.random() * dizeListesi.length);
-      } while (rastgele === oncekiIndex);
+      } while (rastgele === oncekiRastgele);
+      oncekiRastgele = rastgele;
 
-      oncekiIndex = rastgele;
-
-      const dizeEl = document.getElementById("dize");
-      dizeEl.textContent = dizeListesi[rastgele];
-      dizeEl.style.display = "block";
+      dizeEl.style.opacity = 0;
+      setTimeout(() => {
+        dizeEl.textContent = dizeListesi[rastgele];
+        dizeEl.style.display = "block";
+        dizeEl.style.opacity = 1;
+      }, 300);
     }
   </script>
 
