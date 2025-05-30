@@ -22,36 +22,36 @@
       position: relative;
     }
 
-    .for-nursena-container {
+    .for-nursena {
       position: fixed;
-      top: 4px; /* Burayı biraz yukarı çekti */
+      top: 22px;  /* Yukarıya daha yakın */
       left: 50%;
       transform: translateX(-50%);
-      text-align: center;
+      font-family: 'Ephesis', cursive;
+      font-size: 32px;
+      font-weight: bold;
+      color: #000;
+      /* gölge kaldırıldı */
       z-index: 10;
       user-select: none;
       pointer-events: none;
     }
 
-    .for-nursena {
-      font-family: 'Ephesis', cursive;
-      font-size: 32px;
-      color: black;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-      margin: 0;
-      padding: 0;
-    }
-
     .bugun-tarih {
-      font-family: 'Arial', sans-serif;
-      font-size: 22px;  /* istediğin boyut */
-      font-weight: 600;
+      font-family: 'Times New Roman', serif;
+      font-size: 22px;
+      font-weight: bold;
       color: black;
       opacity: 0;
       transition: opacity 1s ease;
-      margin-top: 2px; /* For Nursena'nın hemen altında */
+      margin-top: 12px;  /* For Nursena'nın altında daha aşağıda */
       user-select: none;
       pointer-events: none;
+      position: fixed;
+      top: 66px;  /* for-nursena top 22px + font size + margin, ayarla uyumlu */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
     }
 
     .footer-frame {
@@ -59,7 +59,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 45px;
+      height: 60px;
       object-fit: cover;
       z-index: 5;
       pointer-events: none;
@@ -67,7 +67,7 @@
 
     .buton {
       position: fixed;
-      bottom: 60px; /* Öncekinden 5px yukarı */
+      bottom: 65px; /* 5px üstünde alt çerçeve (60px) */
       left: 50%;
       transform: translateX(-50%);
       width: 60px;
@@ -112,10 +112,8 @@
 </head>
 <body>
 
-  <div class="for-nursena-container">
-    <p class="for-nursena">For Nursena</p>
-    <p class="bugun-tarih" id="bugunTarih"></p>
-  </div>
+  <div class="for-nursena">For Nursena</div>
+  <div class="bugun-tarih" id="bugunTarih"></div>
 
   <button class="buton" aria-label="Şiir Getir"></button>
 
@@ -134,6 +132,19 @@
 
     const buton = document.querySelector('.buton');
     const siirDizesi = document.getElementById('siirDizesi');
+    const bugunTarih = document.getElementById('bugunTarih');
+
+    // Tarih formatı: 30 Mayıs
+    const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    const tarih = new Date();
+    const gun = tarih.getDate();
+    const ay = aylar[tarih.getMonth()];
+    bugunTarih.textContent = `${gun} ${ay}`;
+    
+    // Tarih fade in
+    setTimeout(() => {
+      bugunTarih.style.opacity = 1;
+    }, 500);
 
     buton.addEventListener('click', () => {
       const rastgeleIndex = Math.floor(Math.random() * siirler.length);
@@ -144,25 +155,6 @@
         siirDizesi.style.opacity = 1;
       }, 600);
     });
-
-    function tarihYaz() {
-      const aylar = [
-        "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
-        "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
-      ];
-
-      const tarihElem = document.getElementById('bugunTarih');
-      const now = new Date();
-      const gun = now.getDate();
-      const ay = aylar[now.getMonth()];
-
-      tarihElem.textContent = `${gun} ${ay}`;
-      setTimeout(() => {
-        tarihElem.style.opacity = 1;
-      }, 200);
-    }
-
-    tarihYaz();
   </script>
 
 </body>
