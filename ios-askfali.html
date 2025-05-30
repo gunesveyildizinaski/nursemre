@@ -22,17 +22,34 @@
       position: relative;
     }
 
-    .for-nursena {
+    .for-nursena-container {
       position: fixed;
-      top: 5px; /* Üstte biraz daha yukarı */
+      top: 4px; /* Burayı biraz yukarı çekti */
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Ephesis', cursive;
-      font-size: 28px; /* Daha küçük */
-      font-weight: 700; /* Kalın */
-      color: #000;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      text-align: center;
       z-index: 10;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .for-nursena {
+      font-family: 'Ephesis', cursive;
+      font-size: 32px;
+      color: black;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      margin: 0;
+      padding: 0;
+    }
+
+    .bugun-tarih {
+      font-family: 'Arial', sans-serif;
+      font-size: 22px;  /* istediğin boyut */
+      font-weight: 600;
+      color: black;
+      opacity: 0;
+      transition: opacity 1s ease;
+      margin-top: 2px; /* For Nursena'nın hemen altında */
       user-select: none;
       pointer-events: none;
     }
@@ -42,7 +59,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 45px; /* Küçültüldü */
+      height: 45px;
       object-fit: cover;
       z-index: 5;
       pointer-events: none;
@@ -50,7 +67,7 @@
 
     .buton {
       position: fixed;
-      bottom: 50px; /* Yeni alt çerçeve yüksekliğine göre 5px üstünde */
+      bottom: 60px; /* Öncekinden 5px yukarı */
       left: 50%;
       transform: translateX(-50%);
       width: 60px;
@@ -95,7 +112,10 @@
 </head>
 <body>
 
-  <div class="for-nursena">For Nursena</div>
+  <div class="for-nursena-container">
+    <p class="for-nursena">For Nursena</p>
+    <p class="bugun-tarih" id="bugunTarih"></p>
+  </div>
 
   <button class="buton" aria-label="Şiir Getir"></button>
 
@@ -124,6 +144,25 @@
         siirDizesi.style.opacity = 1;
       }, 600);
     });
+
+    function tarihYaz() {
+      const aylar = [
+        "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+        "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+      ];
+
+      const tarihElem = document.getElementById('bugunTarih');
+      const now = new Date();
+      const gun = now.getDate();
+      const ay = aylar[now.getMonth()];
+
+      tarihElem.textContent = `${gun} ${ay}`;
+      setTimeout(() => {
+        tarihElem.style.opacity = 1;
+      }, 200);
+    }
+
+    tarihYaz();
   </script>
 
 </body>
