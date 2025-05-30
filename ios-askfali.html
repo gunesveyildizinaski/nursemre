@@ -38,10 +38,10 @@
 
     .date {
       position: fixed;
-      top: 60px;
+      top: 70px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family:  'Times New Roman', serif;
       font-weight: bold;
       font-style: italic;
       font-size: 22px;
@@ -130,118 +130,161 @@
     // Şiirler (senin verdiğin tam liste buraya yapıştırıldı)
     const siirler = [
 `Sözlere değil sana çabasını ve zamanını ayırana inan .`,
+
 `Sen ol da , ister yar ol , ister yara ;
-Lütfun da başım üstüne , kahrın da .`,
+ Lütfun da başım üstüne , kahrın da .`,
+
 `Bahar bir insanla gelebilir bir insana .`,
+
 `Çiçeklerden papatyayı  
-İnsanlardan seni sevdim .`,
+ İnsanlardan seni sevdim .`,
+
 `Onu sevmek nefes almak gibiydi ,  
-bir insan nefes almaktan nasıl vazgeçer ki ?`,
+ bir insan nefes almaktan 
+ nasıl vazgeçer ki ?`,
+
 `Bazen beklemek lazım ,
-en güzeli için ...`,
+ en güzeli için ...`,
+
 `Neyi düşünsem , seni düşünüyorum .
-Neyi görsem , seni görüyorum .`,
+ Neyi görsem , seni görüyorum .`,
+
 `Ve hayattır sevmek.
-Birini çok uzaktayken bile ,
-yüreğinde taşıyabilmek .`,
+ Birini çok uzaktayken bile ,
+ yüreğinde taşıyabilmek .`,
+
 `Keşke sen ben olsan ;
-Seni sevmenin ne kadar 
-zor olduğunu anlasan .
-Keşke ben sen olsam ;
-Bu kadar sevilmenin tadını çıkarsam ...`,
+ Seni sevmenin ne kadar 
+ zor olduğunu anlasan .
+ Keşke ben sen olsam ;
+ Bu kadar sevilmenin tadını çıkarsam ...`,
+
 `Öylesine güzel
 seviyorum ki seni ,
 Öylesine Saf . 
 Öylesine temiz .
 Öylesine derin .
 Ve ''Öylesine'' değil ...`,
+
 `Sen yeter ki çocukluk yap .
 Gönlümde salıncağın hep hazır .`,
+
 `Ey sevgili !
 Bir geceliğine
 değiş tokuş etsek yüreğimizi ,
 Taşıyabilir miydin bendeki seni ?`,
+
 `Aklımdan çıkmıyor 
 Aklım çıkıyor
 O çıkmıyor`,
+
 `Ama uzaktaydı 
 Uzaklığını düşündükçe 
 Ona daha da güçlü bağlanıyordum .`,
+
 `İçimde sana kavuşma ümidi güçlendikçe , 
 Kainatı güllük gülistanlık görüyorum ...`,
+
 `Benim kalbim senin ellerinde çiçek açtı .
 Bunu sana nasıl anlatırım bilmiyorum ...`,
+
 `Beni bu hayata bağlayan her şey 
 Senin iki kolun arasında birikmiş
 gibi ..`,
+
 `Senden başkasını sevecek , 
 kalbim de yok gücüm de .`,
+
 `Yanımda taşıdığım fotoğrafının , 
 gözlerinden öptüm 
 defalarca .`,
+
 `Bir gün daha 
 seni görmeden geçiyor . 
 Ama kavuşacağız `,
+
 `İyi gelen ne varsa
 hepsi sensin işte .`,
+
 `Her gün bir kere hatırlar mısın beni ?
 Her hatırladığında gülümser misin bire kere ?
 kimseye belli etmeden ...`,
+
 `Muazzam bir ihtimalsin .
 Gökyüzüne dokunmak gibi . 
 Tüm maviliklerin sahibi olmak gibi
 Hani nasıl desem ' mutlu olmak gibi ...`,
+
 `Bin yıl ömrüm olsa
 Bin yıl seni severdim .
 Bin yıl benim olsan 
 Bin yıl daha isterdim .`,
+
 `Seni sevmeyi dünyanın en güzel 
 şiiri yapacağım ...`,
+
 `Yaşamın boyunca başına bir tane bile
 kötü olay gelmemesini dileyecek kadar 
 çok seviyorum seni .`,
+
 `Ben bütün bu - belki de manasız -
 iç sıkıntılarından senin var olduğunu 
 hatırlayarak sıyrılıyorum ...`,
+
 `Gökyüzünün çilleri var bu gece . 
 Ve sen onlardan bile güzelsin ...`,
+
 `Bugün beni ne kadar seviyorsun balım  :)`,
+
 `Kim ne derse desin 
 ya da ne yaparsa yapsın
 sen hep rengini yitirmeyen
 bir zümrüt olacaksın balım ...`,
+
 `Sen benim Gün eşimsin ,
 zifirin bile örtemediği .
 Ben senin yıldızınım
 Senden uzakta zifirin içinde ...`,
+
 `Sen benim en kıymetli sırrımsın ...`,
+
 `Çiçek de çiçekli günler de sensin ...`,
+
 `Emre'ye sormuşlar :
 O yâr ile hoş musun ?
 Hoş olayım , olmayayim
 O yâr benim , kime ne ?`,
+
 `Emre için en kötüsü de bir gün 
 gerçekten sevilirse buna inanmanın
 zorluğunu fark etmesi olacaktı ...`,
+
 `Günlere bakarsın katı katı ,
 Üzerine çekersin perde .
 Yoldan geçenler var da
 Her akşam gelenler nerede ?`,
+
 `Ne başkası oldu ne de olacak .
 Sen çalmazsan kapım açılmayacak .`,
+
 `Emre güzelliğini kaybetmiş bu dünyada 
 Nursenasına şahit olmuştu ...`,
+
 `Ne çıkar yanımda olmasan !
 Kalbim senden ibaret değil mi ?
 Uzaktan sevmek zor demişsin .
 Etme sevdam
 Uzaktan sevmek ibadet değil mi ?`,
+
 `Kalbimi gülümsetiyorsun`,
+
 `Gözümle gördüğüm değil ,
 Gönlümde kördüğümsün .
 Çözmeye niyetim yok , 
 Sen benim ömürlüğümsün ...`,
+
 `Sende gördüğümü görecekler diye ödüm kopuyor .`,
+
 `Gözüm gözüne değmeden yazdığım şiirler melal .
 Varsın değmesin razıyım ey  yâr ...
 Böylesi de helal !`
