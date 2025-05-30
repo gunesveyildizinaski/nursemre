@@ -41,9 +41,10 @@
       pointer-events: none;
     }
 
+    /* Tarih ortada, üstten biraz aşağı */
     .tarih {
       position: fixed;
-      top: 150px;
+      top: 150px;       /* for nursena'dan biraz aşağı */
       left: 50%;
       transform: translateX(-50%);
       font-size: 28px;
@@ -56,9 +57,10 @@
       max-width: 400px;
     }
 
+    /* Şiir dizesi tarih altı, arada boşluk */
     .dize {
       position: fixed;
-      top: 300px;
+      top: 300px;      /* tarih altı ve arada boşluk */
       left: 50%;
       transform: translateX(-50%);
       font-size: 22px;
@@ -69,14 +71,14 @@
       user-select: none;
       text-align: center;
       display: none;
-
       opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      transition: opacity 1s ease;
     }
 
+    /* Buton alt kısımda, ortada */
     .buton-container {
       position: fixed;
-      bottom: 250px;
+      bottom: 250px;   /* çerçevenin üstünde */
       left: 50%;
       transform: translateX(-50%);
       cursor: pointer;
@@ -99,27 +101,33 @@
       }
     }
 
-    @media (max-width: 600px) {
+    /* Fade-in animasyonu için aktif sınıf */
+    .fade-in {
+      opacity: 1 !important;
+    }
+
+    /* Mobil ve küçük ekranlar için ayarlar */
+    @media (max-width: 1200px) {
       .tarih {
-        top: 120px !important;
-        font-size: 20px !important;
-        max-width: 90% !important;
+        top: 100px;
+        font-size: 22px;
+        max-width: 90%;
+        padding: 0 10px;
       }
-
       .dize {
-        top: 150px !important;
-        font-size: 16px !important;
-        max-width: 90% !important;
+        top: 160px;
+        font-size: 18px;
+        max-width: 90%;
+        padding: 0 10px;
       }
-
       .buton-container {
-        bottom: 130px !important;
-        width: 60px !important;
-        height: 60px !important;
+        bottom: 150px;
+        width: 60px;
+        height: 60px;
       }
-
       .for-nursena {
-        font-size: 24px !important;
+        font-size: 28px;
+        top: 5px;
       }
     }
   </style>
@@ -160,22 +168,25 @@
 
     document.getElementById("tarih").textContent = formatTarih();
 
-    let oncekiRastgele = -1;
-    const dizeEl = document.getElementById("dize");
+    let oncekiIndex = -1;
 
     function yeniDize() {
+      const dizeEl = document.getElementById("dize");
+
       let rastgele;
       do {
         rastgele = Math.floor(Math.random() * dizeListesi.length);
-      } while (rastgele === oncekiRastgele);
-      oncekiRastgele = rastgele;
+      } while (rastgele === oncekiIndex);
+      oncekiIndex = rastgele;
 
       dizeEl.style.opacity = 0;
+
+      // Fade out, sonra text değiştir ve fade in yap
       setTimeout(() => {
         dizeEl.textContent = dizeListesi[rastgele];
         dizeEl.style.display = "block";
         dizeEl.style.opacity = 1;
-      }, 300);
+      }, 500);
     }
   </script>
 
