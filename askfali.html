@@ -102,35 +102,36 @@
       }
     }
 
-    /* 📱 Mobil görünüm ayarları */
-    @media (max-width: 600px) {
+    /* 📱 iPhone 13 ve benzeri cihazlar için mobil görünüm */
+    @media screen and (max-width: 430px) {
       .for-nursena {
-        font-size: 50px;
-        top: 20px;
+        font-size: 48px;
+        top: 30px;
       }
 
       .tarih {
-        top: 80px;
-        font-size: 70px;
+        top: 110px;
+        font-size: 32px;
         max-width: 90%;
+        padding: 0 20px;
       }
 
       .dize {
-        top: 140px;
-        font-size: 60px;
+        top: 180px;
+        font-size: 28px;
+        line-height: 1.6;
         max-width: 90%;
-        padding: 0 15px;
-        line-height: 1.4;
+        padding: 0 20px;
       }
 
       .buton-container {
-        bottom: 160px;
-        width: 80px;
-        height: 80px;
+        bottom: 140px;
+        width: 90px;
+        height: 90px;
       }
 
       .footer-frame {
-        height: 80px;
+        height: 90px;
       }
     }
   </style>
@@ -184,7 +185,7 @@
       sonDizeIndex = yeniIndex;
 
       dizeEl.classList.remove("fade-in");
-      void dizeEl.offsetWidth; // Reflow for animation reset
+      void dizeEl.offsetWidth;
       dizeEl.textContent = dizeListesi[yeniIndex];
       dizeEl.style.display = "block";
       dizeEl.classList.add("fade-in");
