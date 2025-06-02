@@ -2,299 +2,362 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Burç Yorumu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Burç Yorumları</title>
   <style>
-    /* Stil kodları aynı */
+    @import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+
+    /* Genel ve iPhone 13 için sabit genişlik ve yükseklik */
     html, body {
-      margin: 0; padding: 0; height: 100%; overflow: hidden;
-      font-family: 'Times New Roman', serif;
-      background-image: url("4k.png");
+      margin: 0; padding: 0;
+      width: 390px;  /* iPhone 13 genişliği */
+      height: 844px; /* iPhone 13 yüksekliği */
+      overflow: hidden; /* Scroll kapalı */
+      background: url('4k.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: white;
-      -webkit-font-smoothing: antialiased;
-      -webkit-text-size-adjust: 100%;
-      overscroll-behavior: none;
+      font-family: 'Times New Roman', serif;
+      -webkit-text-size-adjust: none;
       position: relative;
-    }
-    .footer-frame {
-      position: fixed;
-      bottom: 0; left: 0;
-      width: 100%;
-      height: 40px;
-      object-fit: cover;
-      z-index: 10;
-      pointer-events: none;
       user-select: none;
     }
+
+    /* Alt çerçeve */
+    .cerceve {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px; /* 40 hp yerine px verdim */
+      background: url('cerceve.png') no-repeat left bottom;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    /* For Nursena üstte */
     .for-nursena {
       position: fixed;
-      top: 10px; left: 50%;
+      top: 10px;
+      left: 50%;
       transform: translateX(-50%);
       font-family: 'Ephesis', cursive;
       font-size: 22px;
       font-weight: bold;
-      color: rgb(0, 0, 0);
-      text-shadow: none;
-      z-index: 10;
-      pointer-events: none;
+      color: #000;
+      z-index: 100;
       user-select: none;
+      pointer-events: none;
     }
-    .center-wrapper {
+
+    /* Tarih */
+    .tarih {
+      position: fixed;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Times New Roman', serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Burç adı */
+    .burc-adi {
+      position: fixed;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Arial, sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: #222;
+      z-index: 100;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Yorum kutusu */
+    .yorum-kutu {
+      position: fixed;
+      top: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      min-height: 100px;
+      max-height: 200px;
+      background-color: rgba(255, 255, 255, 0.65);
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 15px;
+      color: #000;
+      font-family: 'Times New Roman', serif;
+      overflow-y: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+      user-select: text;
+      z-index: 100;
+    }
+
+    /* Döndür butonu */
+    .degistir-btn {
+      position: fixed;
+      top: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      color: #333;
+      z-index: 100;
+      transition: color 0.3s ease;
+    }
+    .degistir-btn:hover {
+      color: #000;
+    }
+
+    /* Başlangıç butonu */
+    #start-button {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 320px;
+      height: 50px;
+      font-family: 'Times New Roman', serif;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 2px solid #333;
+      background-color: #fff;
+      color: #333;
+      user-select: none;
+      z-index: 50;
+      transition: background-color 0.3s ease;
+    }
+    #start-button:hover {
+      background-color: #eee;
+    }
+
+    /* Burç seçim container */
+    #burc-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      flex-direction: column;
+      gap: 12px;
+      max-height: 70%;
+      overflow-y: auto;
+      width: 80%;
+      max-width: 320px;
+      z-index: 100;
+    }
+
+    /* Burç butonları */
+    .burc-button {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1.5px solid #444;
+      background-color: #fff;
+      color: #222;
+      user-select: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      height: calc(100% - 100px);
-      padding: 50px 20px 60px 20px;
-      box-sizing: border-box;
+      gap: 8px;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    #infoBox {
-      text-align: center;
-      margin-bottom: 20px;
+    .burc-button:hover {
+      background-color: #ddd;
     }
-    #tarih {
-      font-family: 'Times New Roman', serif;
-      font-size: 24px;
-      font-weight: bold;
-      color: black;
-    }
-    #burcAdi {
-      font-family: 'Times New Roman', serif;
-      font-size: 22px;
-      font-weight: normal;
-      color: black;
-    }
-    #secimBtn {
-      padding: 14px 36px;
-      font-size: 20px;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      background-color: rgba(245, 245, 245, 0.8);
-      color: #333;
-      font-weight: bold;
-      user-select: none;
-      transition: background-color 0.3s ease;
-      max-width: 90vw;
-      min-width: 280px;
-      text-align: center;
-    }
-    #secimBtn:hover {
-      background-color: rgba(230, 230, 230, 0.9);
-    }
-    #burcSecim {
-      margin-top: 30px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 50vh;
-      overflow-y: auto;
-      width: 320px;
-      max-width: 90vw;
-    }
-    #burcSecim button {
-      background-color: rgba(245, 245, 245, 0.85);
-      border: none;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 18px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #333;
-      user-select: none;
-      transition: background-color 0.3s ease;
-      text-align: left;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-    #burcSecim button:hover {
-      background-color: rgba(230, 230, 230, 0.9);
-    }
-    #yorumAlani {
-      margin-top: 10px;
-      max-width: 320px;
-      padding: 20px;
-      border-radius: 16px;
-      text-align: center;
-      font-size: 20px;
-      font-style: italic;
-      min-height: 100px;
-      display: none;
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-      background-color: rgba(0,0,0,0.4);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      user-select: text;
-      max-width: 90vw;
-      word-wrap: break-word;
-    }
-    #yenileBtn {
-      margin-top: 20px;
-      padding: 12px 28px;
-      font-size: 18px;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      background-color: rgba(245, 245, 245, 0.85);
-      color: #333;
-      font-weight: bold;
-      display: none;
-      user-select: none;
-      transition: background-color 0.3s ease;
-      max-width: 90vw;
-      min-width: 280px;
-      text-align: center;
-    }
-    #yenileBtn:hover {
-      background-color: rgba(230, 230, 230, 0.9);
-    }
-    #burcSecim::-webkit-scrollbar {
-      width: 6px;
-    }
-    #burcSecim::-webkit-scrollbar-thumb {
-      background-color: rgba(200, 200, 200, 0.5);
-      border-radius: 3px;
-    }
+
   </style>
 </head>
 <body>
+
   <div class="for-nursena">For Nursena</div>
+  <div class="tarih" id="tarih"></div>
+  <div class="burc-adi" id="burc-adi"></div>
+  <div class="yorum-kutu" id="yorum-kutu"></div>
+  <button class="degistir-btn" id="degistir-btn" title="Yorumu değiştir">🔄</button>
 
-  <div class="center-wrapper">
-    <button id="secimBtn">Lütfen burcunuzu seçin</button>
+  <button id="start-button">Lütfen burcunuzu seçiniz</button>
 
-    <div id="burcSecim">
-      <button data-burc="Akrep">Akrep ♏ / 23 Oct - 21 Nov</button>
-      <button data-burc="Aslan">Aslan ♌ / 23 Jul - 22 Aug</button>
-      <button data-burc="Boğa">Boğa ♉ / 20 Apr - 20 May</button>
-      <button data-burc="Başak">Başak ♍ / 23 Aug - 22 Sep</button>
-      <button data-burc="İkizler">İkizler ♊ / 21 May - 20 Jun</button>
-      <button data-burc="Kova">Kova ♒ / 21 Jan - 18 Feb</button>
-      <button data-burc="Koç">Koç ♈ / 21 Mar - 19 Apr</button>
-      <button data-burc="Oğlak">Oğlak ♑ / 22 Dec - 19 Jan</button>
-      <button data-burc="Terazi">Terazi ♎ / 23 Sep - 22 Oct</button>
-      <button data-burc="Yay">Yay ♐ / 22 Nov - 21 Dec</button>
-      <button data-burc="Yengeç">Yengeç ♋ / 21 Jun - 22 Jul</button>
-    </div>
-
-    <div id="infoBox" style="display: none;">
-      <div id="tarih"></div>
-      <div id="burcAdi"></div>
-    </div>
-
-    <div id="yorumAlani"></div>
-    <button id="yenileBtn" title="Yenile (⟳)">⟳</button>
+  <div id="burc-container">
+    <!-- Burç butonları buraya JS ile gelecek -->
   </div>
 
-  <img src="cerceve.png" alt="" class="footer-frame" />
+  <div class="cerceve"></div>
 
-  <script>
-    const secimBtn = document.getElementById("secimBtn");
-    const burcSecim = document.getElementById("burcSecim");
-    const yorumAlani = document.getElementById("yorumAlani");
-    const yenileBtn = document.getElementById("yenileBtn");
-    const tarihDiv = document.getElementById("tarih");
-    const burcAdiDiv = document.getElementById("burcAdi");
-    const infoBox = document.getElementById("infoBox");
+<script>
+  const startButton = document.getElementById('start-button');
+  const burcContainer = document.getElementById('burc-container');
+  const tarihEl = document.getElementById('tarih');
+  const burcAdiEl = document.getElementById('burc-adi');
+  const yorumKutu = document.getElementById('yorum-kutu');
+  const degistirButon = document.getElementById('degistir-btn');
 
-    const yorumlar = {
-      "Akrep": [
-        "Akrep burcu, gizemli ve tutkulu bir yapıya sahiptir.",
-        "Akrepler sezgileriyle ön plana çıkarlar."
-      ],
-      "Aslan": [
-        "Aslan burcu cesur ve lider ruhludur.",
-        "Aslanlar enerjileriyle etraflarını aydınlatırlar."
-      ],
-      "Boğa": [
-        "Boğa burcu sabırlı ve kararlıdır.",
-        "Boğalar konfor ve güvenlik ararlar."
-      ],
-      "Başak": [
-        "Başak burcu titiz ve analitik düşünür.",
-        "Başaklar detaylarda mükemmelliği ararlar."
-      ],
-      "İkizler": [
-        "İkizler burcu iletişimde ustadır.",
-        "İkizler zeki ve esnektir."
-      ],
-      "Kova": [
-        "Kova burcu yenilikçi ve özgür ruhludur.",
-        "Kovalar sıra dışı düşünürler."
-      ],
-      "Koç": [
-        "Koç burcu atılgan ve liderdir.",
-        "Koçlar enerjik ve cesurdur."
-      ],
-      "Oğlak": [
-        "Oğlak burcu disiplinli ve azimlidir.",
-        "Oğlaklar hedeflerine sadıktır."
-      ],
-      "Terazi": [
-        "Terazi burcu dengeli ve adaletlidir.",
-        "Teraziler uyum ve barış peşindedir."
-      ],
-      "Yay": [
-        "Yay burcu maceracı ve özgürdür.",
-        "Yaylar iyimser ve neşelidir."
-      ],
-      "Yengeç": [
-        "Yengeç burcu duygusal ve koruyucudur.",
-        "Yengeçler aile bağlarına önem verir."
-      ],
-    };
+  // Burçlar alfabetik, emoji, tarih aralığı
+  const burclar = [
+    { isim: "Akrep", emoji: "♏", tarihAraligi: "23 Eki - 21 Kas" },
+    { isim: "Aslan", emoji: "♌", tarihAraligi: "23 Tem - 22 Ağu" },
+    { isim: "Balık", emoji: "♓", tarihAraligi: "20 Şub - 20 Mar" },
+    { isim: "Başak", emoji: "♍", tarihAraligi: "23 Ağu - 22 Eyl" },
+    { isim: "Boğa", emoji: "♉", tarihAraligi: "21 Nis - 20 May" },
+    { isim: "İkizler", emoji: "♊", tarihAraligi: "21 May - 21 Haz" },
+    { isim: "Koç", emoji: "♈", tarihAraligi: "21 Mar - 20 Nis" },
+    { isim: "Kova", emoji: "♒", tarihAraligi: "20 Oca - 18 Şub" },
+    { isim: "Oğlak", emoji: "♑", tarihAraligi: "22 Ara - 21 Oca" },
+    { isim: "Terazi", emoji: "♎", tarihAraligi: "23 Eyl - 22 Eki" },
+    { isim: "Yay", emoji: "♐", tarihAraligi: "22 Kas - 21 Ara" },
+    { isim: "Yengeç", emoji: "♋", tarihAraligi: "22 Haz - 22 Tem" }
+  ];
 
-    function formatTarih() {
-      const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-      const bugun = new Date();
-      return `${bugun.getDate()} ${aylar[bugun.getMonth()]}`;
+  // Burç yorumları (örnek tam cümleler)
+  const burcYorumlari = {
+    "Akrep": [
+      "Bugün iç sesine kulak ver, önemli kararlar alabilirsin.",
+      "Çevrendeki kişilerle iletişimde dikkatli olmalısın.",
+      "Yeni fırsatlar kapıda, cesaretini kaybetme."
+    ],
+    "Aslan": [
+      "Enerjin yüksek, liderlik vasıfların ön planda.",
+      "Sosyal çevrende olumlu gelişmeler yaşayabilirsin.",
+      "Aile ilişkilerine daha çok önem vermen gereken bir gün."
+    ],
+    "Balık": [
+      "Sezgilerin güçlü, önemli kararlar verirken onlara güven.",
+      "Yaratıcılığın artıyor, yeni projeler için harika bir zaman.",
+      "Sağlığına dikkat etmeli, dinlenmeye özen göstermelisin."
+    ],
+    "Başak": [
+      "Aşk hayatında yeni başlangıçlar seni bekliyor.",
+      "Duygularını ifade etmekte zorlanmamalısın.",
+      "Partnerinle iletişim bugün çok önemli olacak."
+    ],
+    "Boğa": [
+      "Maddi konularda beklenmedik gelişmeler olabilir.",
+      "Sabırlı olursan tüm zorlukların üstesinden geleceksin.",
+      "Sağlığına dikkat etmeli, düzenli beslenmeye önem ver."
+    ],
+    "İkizler": [
+      "Bugün yeni insanlarla tanışabilir, iletişim becerilerini kullanabilirsin.",
+      "Zihnin hızlı çalışıyor, projelerinde verimli olacaksın.",
+      "Aşk hayatında sürpriz gelişmeler yaşanabilir."
+    ],
+    "Koç": [
+      "Enerjin yüksek, yeni başlangıçlar için ideal bir gün.",
+      "Kararlarında cesur olmalı, risk almaktan çekinmemelisin.",
+      "Spor yapmak sana iyi gelecek, hareketsiz kalma."
+    ],
+    "Kova": [
+      "Yaratıcı fikirlerinle fark yaratacaksın.",
+      "Sosyal çevrende destek göreceğin gelişmeler olabilir.",
+      "Kendi ihtiyaçlarına öncelik vermeyi unutma."
+    ],
+    "Oğlak": [
+      "Disiplinli çalışman başarıyı getirecek.",
+      "Maddi konularda planlama yapman faydalı olacak.",
+      "Aile ile zaman geçirmek moralini yükseltebilir."
+    ],
+    "Terazi": [
+      "Dengeyi bulmak için dikkatli adımlar atmalısın.",
+      "İlişkilerinde uyum ve anlayış öne çıkıyor.",
+      "Sanatsal faaliyetlere yönelmek ruhunu dinlendirecek."
+    ],
+    "Yay": [
+      "Macera isteğin artıyor, yeni yerlere gitmek isteyebilirsin.",
+      "Eğitim ve öğrenme konularında fırsatlar yakalayacaksın.",
+      "İletişimde açıklık ve samimiyet önemli olacak."
+    ],
+    "Yengeç": [
+      "Aile ve ev hayatına odaklanmak isteyebilirsin.",
+      "Duygusal destek alman gereken durumlar olabilir.",
+      "Sağlığını ihmal etmemeli, dengeli beslenmelisin."
+    ]
+  };
+
+  // Burç butonlarını oluştur
+  function burcButonlariniOlustur() {
+    burclar.forEach(burc => {
+      const btn = document.createElement('button');
+      btn.classList.add('burc-button');
+      btn.setAttribute('data-burc', burc.isim);
+      btn.setAttribute('data-emoji', burc.emoji);
+      btn.textContent = `${burc.isim} ${burc.emoji} ${burc.tarihAraligi}`;
+      burcContainer.appendChild(btn);
+
+      btn.addEventListener('click', () => {
+        secilenBurc = burc.isim;
+        secilenEmoji = burc.emoji;
+        yorumIndex = 0;
+
+        // Ekran değişiklikleri
+        startButton.style.display = 'none';
+        burcContainer.style.display = 'none';
+        yorumEkraniGoster();
+      });
+    });
+  }
+
+  // Tarihi Türkçe formatta almak (örn: 2 Haziran)
+  function tarihGetir() {
+    const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+      "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    const now = new Date();
+    const gun = now.getDate();
+    const ay = aylar[now.getMonth()];
+    return `${gun} ${ay}`;
+  }
+
+  // Yorum ekranını göster
+  function yorumEkraniGoster() {
+    tarihEl.textContent = tarihGetir();
+    burcAdiEl.textContent = `${secilenBurc} ${secilenEmoji}`;
+    yorumKutu.textContent = burcYorumlari[secilenBurc][yorumIndex];
+    yorumKutu.style.display = 'block';
+    degistirButon.style.display = 'inline-block';
+    tarihEl.style.display = 'block';
+    burcAdiEl.style.display = 'block';
+  }
+
+  // Başlangıçta sadece start butonu görünür
+  yorumKutu.style.display = 'none';
+  degistirButon.style.display = 'none';
+  tarihEl.style.display = 'none';
+  burcAdiEl.style.display = 'none';
+
+  let secilenBurc = null;
+  let secilenEmoji = null;
+  let yorumIndex = 0;
+
+  startButton.addEventListener('click', () => {
+    startButton.style.display = 'none';
+    burcContainer.style.display = 'flex';
+  });
+
+  degistirButon.addEventListener('click', () => {
+    if (!secilenBurc) return;
+    yorumIndex++;
+    if (yorumIndex >= burcYorumlari[secilenBurc].length) {
+      yorumIndex = 0;
     }
+    yorumKutu.textContent = burcYorumlari[secilenBurc][yorumIndex];
+  });
 
-    let aktifBurc = null;
-    let aktifYorumIndex = 0;
+  // Burç butonlarını hazırla
+  burcButonlariniOlustur();
+</script>
 
-    secimBtn.addEventListener("click", () => {
-      secimBtn.style.display = "none";
-      burcSecim.style.display = "flex";
-      yorumAlani.style.display = "none";
-      yenileBtn.style.display = "none";
-      infoBox.style.display = "none";
-    });
-
-    burcSecim.addEventListener("click", (e) => {
-      if (e.target.tagName === "BUTTON") {
-        aktifBurc = e.target.getAttribute("data-burc");
-        aktifYorumIndex = 0;
-        burcSecim.style.display = "none";
-        tarihDiv.textContent = formatTarih();
-        // Burç adı ve emoji sadece butondan alıyoruz, tarih aralığını göstermiyoruz burada:
-        const butonText = e.target.textContent.split(" /")[0]; 
-        burcAdiDiv.textContent = butonText; 
-        infoBox.style.display = "block";
-        gösterYorum(aktifBurc, aktifYorumIndex);
-      }
-    });
-
-    yenileBtn.addEventListener("click", () => {
-      if (!aktifBurc) return;
-      const yorumSayisi = yorumlar[aktifBurc].length;
-      let yeniIndex;
-      do {
-        yeniIndex = Math.floor(Math.random() * yorumSayisi);
-      } while (yeniIndex === aktifYorumIndex && yorumSayisi > 1);
-      aktifYorumIndex = yeniIndex;
-      gösterYorum(aktifBurc, aktifYorumIndex);
-    });
-
-    function gösterYorum(burc, index) {
-      yorumAlani.textContent = yorumlar[burc][index];
-      yorumAlani.style.display = "block";
-      yenileBtn.style.display = "inline-block";
-    }
-  </script>
 </body>
 </html>
