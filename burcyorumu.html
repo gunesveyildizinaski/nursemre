@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet" />
   <style>
+    /* Stil kodları aynı */
     html, body {
       margin: 0; padding: 0; height: 100%; overflow: hidden;
       font-family: 'Times New Roman', serif;
@@ -42,15 +43,30 @@
       pointer-events: none;
       user-select: none;
     }
-    body, .container {
+    .center-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
       flex-direction: column;
-      padding-bottom: 50px; /* Footer için boşluk */
+      height: calc(100% - 100px);
+      padding: 50px 20px 60px 20px;
       box-sizing: border-box;
-      user-select: none;
+    }
+    #infoBox {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #tarih {
+      font-family: 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+    #burcAdi {
+      font-family: 'Times New Roman', serif;
+      font-size: 22px;
+      font-weight: normal;
+      color: black;
     }
     #secimBtn {
       padding: 14px 36px;
@@ -99,7 +115,7 @@
       background-color: rgba(230, 230, 230, 0.9);
     }
     #yorumAlani {
-      margin-top: 30px;
+      margin-top: 10px;
       max-width: 320px;
       padding: 20px;
       border-radius: 16px;
@@ -136,7 +152,6 @@
     #yenileBtn:hover {
       background-color: rgba(230, 230, 230, 0.9);
     }
-    /* Scroll bar stil */
     #burcSecim::-webkit-scrollbar {
       width: 6px;
     }
@@ -149,24 +164,31 @@
 <body>
   <div class="for-nursena">For Nursena</div>
 
-  <button id="secimBtn">Lütfen burcunuzu seçin</button>
+  <div class="center-wrapper">
+    <button id="secimBtn">Lütfen burcunuzu seçin</button>
 
-  <div id="burcSecim">
-    <button data-burc="Akrep">Akrep ♏</button>
-    <button data-burc="Aslan">Aslan ♌</button>
-    <button data-burc="Boğa">Boğa ♉</button>
-    <button data-burc="Başak">Başak ♍</button>
-    <button data-burc="İkizler">İkizler ♊</button>
-    <button data-burc="Kova">Kova ♒</button>
-    <button data-burc="Koç">Koç ♈</button>
-    <button data-burc="Oğlak">Oğlak ♑</button>
-    <button data-burc="Terazi">Terazi ♎</button>
-    <button data-burc="Yay">Yay ♐</button>
-    <button data-burc="Yengeç">Yengeç ♋</button>
+    <div id="burcSecim">
+      <button data-burc="Akrep">Akrep ♏ / 23 Oct - 21 Nov</button>
+      <button data-burc="Aslan">Aslan ♌ / 23 Jul - 22 Aug</button>
+      <button data-burc="Boğa">Boğa ♉ / 20 Apr - 20 May</button>
+      <button data-burc="Başak">Başak ♍ / 23 Aug - 22 Sep</button>
+      <button data-burc="İkizler">İkizler ♊ / 21 May - 20 Jun</button>
+      <button data-burc="Kova">Kova ♒ / 21 Jan - 18 Feb</button>
+      <button data-burc="Koç">Koç ♈ / 21 Mar - 19 Apr</button>
+      <button data-burc="Oğlak">Oğlak ♑ / 22 Dec - 19 Jan</button>
+      <button data-burc="Terazi">Terazi ♎ / 23 Sep - 22 Oct</button>
+      <button data-burc="Yay">Yay ♐ / 22 Nov - 21 Dec</button>
+      <button data-burc="Yengeç">Yengeç ♋ / 21 Jun - 22 Jul</button>
+    </div>
+
+    <div id="infoBox" style="display: none;">
+      <div id="tarih"></div>
+      <div id="burcAdi"></div>
+    </div>
+
+    <div id="yorumAlani"></div>
+    <button id="yenileBtn" title="Yenile (⟳)">⟳</button>
   </div>
-
-  <div id="yorumAlani"></div>
-  <button id="yenileBtn" title="Yenile (⟳)">⟳</button>
 
   <img src="cerceve.png" alt="" class="footer-frame" />
 
@@ -175,6 +197,9 @@
     const burcSecim = document.getElementById("burcSecim");
     const yorumAlani = document.getElementById("yorumAlani");
     const yenileBtn = document.getElementById("yenileBtn");
+    const tarihDiv = document.getElementById("tarih");
+    const burcAdiDiv = document.getElementById("burcAdi");
+    const infoBox = document.getElementById("infoBox");
 
     const yorumlar = {
       "Akrep": [
@@ -223,6 +248,12 @@
       ],
     };
 
+    function formatTarih() {
+      const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+      const bugun = new Date();
+      return `${bugun.getDate()} ${aylar[bugun.getMonth()]}`;
+    }
+
     let aktifBurc = null;
     let aktifYorumIndex = 0;
 
@@ -231,6 +262,7 @@
       burcSecim.style.display = "flex";
       yorumAlani.style.display = "none";
       yenileBtn.style.display = "none";
+      infoBox.style.display = "none";
     });
 
     burcSecim.addEventListener("click", (e) => {
@@ -238,6 +270,11 @@
         aktifBurc = e.target.getAttribute("data-burc");
         aktifYorumIndex = 0;
         burcSecim.style.display = "none";
+        tarihDiv.textContent = formatTarih();
+        // Burç adı ve emoji sadece butondan alıyoruz, tarih aralığını göstermiyoruz burada:
+        const butonText = e.target.textContent.split(" /")[0]; 
+        burcAdiDiv.textContent = butonText; 
+        infoBox.style.display = "block";
         gösterYorum(aktifBurc, aktifYorumIndex);
       }
     });
