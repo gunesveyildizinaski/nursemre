@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <title>Burç Yorumu</title>
-  <meta name="viewport" content="width=752, height=2532, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 752px;
-      height: 2532px;
+      margin: 0; 
+      padding: 0; 
+      height: 100%; 
+      width: 100%;
       font-family: 'Times New Roman', serif;
       background-image: url("4k.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      overflow-x: hidden;
+      overflow: hidden; /* Hem yatay hem dikey scroll kapalı */
       position: relative;
     }
 
@@ -31,6 +31,7 @@
       z-index: 9999;
       text-shadow: none;
       white-space: nowrap;
+      pointer-events: none;
     }
 
     .footer-frame {
